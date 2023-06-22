@@ -1,0 +1,43 @@
+.topFC{
+    font-size: 25px;
+    font-weight: 550;
+    text-align: center;
+    color: black;
+}
+
+.topSC{
+    height: 60%;
+    width: 100%;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 90% 10%;
+    background-color: white;
+}
+
+.FI::placeholder{
+    font-size: 18px;
+    color: rgb(77, 62, 62);
+    font-weight: 550;
+}
+.FI:focus{
+    outline: none;
+}
+
+.topSCI{
+    color: white;
+    text-align-last: center;
+}
+
+.topTC{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.topTCP{
+    color: #c2b8b86e;
+    font-size: 18px;
+    font-weight: 550;
+}
