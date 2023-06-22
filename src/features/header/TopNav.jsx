@@ -31,7 +31,7 @@ const TopNav = () => {
           <Grid item lg={3} xl={3} className={style.topTC}>
             <Grid container>
               <Grid item lg={11} xl={11} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography style={{ color: '#000', fontSize: '20px', fontWeight: '700' }}>Book Session</Typography>
+                <Typography sx={{ color: '#000', fontSize: '20px', fontWeight: '700' }}>Book Session</Typography>
               </Grid>
               <Grid item lg={1} xl={1} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src={CartIcon} alt='CartIcon' />
@@ -43,12 +43,12 @@ const TopNav = () => {
       {isMobile && (
         <Grid container sx={{ backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center', padding: '10px 20px' }}>
           <Grid item lg={12} xl={12} xs={12} sm={12} md={12}>
-            <Grid container>
-              <Grid item sm={7} md={7} xs={7} sx={{ fontSize: '25px', fontWeight: '700', color: '#cd6444', textAlign: 'start' }}>Amy Doll</Grid>
-              <Grid item sm={2.5} md={2.5} xs={2.5} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#cd6444' }}>
-                <Typography style={{ color: '#cd6444', fontSize: '20px', fontWeight: '700' }}>Book Session</Typography>
+            <Grid container spacing={0.5}>
+              <Grid item sm={6} md={6} xs={6} sx={{ fontSize: '20px', fontWeight: '700', color: '#cd6444', textAlign: 'start' }}>Amy Doll</Grid>
+              <Grid item sm={5} md={5} xs={5} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#cd6444' }}>
+                <Typography sx={{ color: '#cd6444 !important', fontSize: '18px', fontWeight: '900' }}>Book Session</Typography>
               </Grid>
-              <Grid item sm={2.5} md={2.5} xs={2.5} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Grid item sm={1} md={1} xs={1} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src={CartMd} alt='CartIcon' />
               </Grid>
             </Grid>
