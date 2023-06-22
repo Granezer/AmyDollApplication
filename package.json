@@ -1,5 +1,4 @@
 {
-  "homepage": "http://kindyluv.github.io/AmyDollFrontend",
   "name": "any_doll_frontend",
   "private": true,
   "version": "0.0.0",
@@ -7,8 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -b build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
