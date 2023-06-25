@@ -16,14 +16,14 @@ const TopNav = () => {
   return (
     <>
       {!isMobile && (
-        <Grid container sx={{ backgroundColor: 'rgb(241, 145, 88)', justifyContent: 'center', alignItems: 'center', padding: '10px 0px' }}>
+        <Grid container sx={{ backgroundColor: '#e79595', justifyContent: 'center', alignItems: 'center', padding: '10px 0px' }}>
           <Grid item lg={3} xl={3} sx={{ fontSize: '25px', fontWeight: '700', color: 'black', textAlign: 'center' }}>Amy Doll</Grid>
           <Grid item lg={6} xl={6} sx={{ backgroundColor: 'white', borderRadius: '8px' }}>
             <Grid container>
               <Grid item lg={10} xl={10}>
                 <input className={style.FI} style={{ color: '#000', backgroundColor: 'white', padding: '5px 10px', border: 'none', borderBottomLeftRadius: '8px', borderTopLeftRadius: '8px', fontSize: '18px', textAlign: 'center' }} type="text" placeholder="Search for products..." value={searchProduct} onChange={handleChange} />
               </Grid>
-              <Grid item lg={2} xl={2} sx={{ color: 'white', backgroundColor: 'rgb(255, 165, 16)', borderTopRightRadius: '8px', borderBottomRightRadius: '8px', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+              <Grid item lg={2} xl={2} sx={{ color: 'white', backgroundColor: '#cd6444', borderTopRightRadius: '8px', borderBottomRightRadius: '8px', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                 <img className={style.topSCI} src={SearchIcon} alt='SearchIcon' />
               </Grid>
             </Grid>

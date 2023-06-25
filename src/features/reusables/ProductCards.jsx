@@ -5,16 +5,16 @@ const ProductCards = props => {
   const theme = useTheme ();
   const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
   return (
-    <Grid container sx={{boxShadow: '5px 2px 5px 2px #a19797'}}>
+    <Grid container sx={{ boxShadow: '0 0 5px rgba(161, 151, 151, 0.3), 0 5px 5px rgba(161, 151, 151, 0.3), 5px 0 5px rgba(161, 151, 151, 0.3), 5px 5px 5px rgba(161, 151, 151, 0.3)', minHeight: { lg: '220px', md: '370px', sm: '370px', xs: '370px', xl: '300px', },  minWidth: { lg: '220px', md: '370px', sm: '370px', xs: '370px', xl: '300px', }}}>
       <Grid
         item
-        lg={5.5}
-        md={5.5}
-        xs={6}
+        lg={5}
+        md={5}
+        xs={5.5}
         sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
       >
         <img
-          style={{width: isMobile ? '150px' : '170px'}}
+          style={{width: isMobile ? '150px' : '170px' }}
           src={props.image}
           alt="Product"
         />

@@ -8,7 +8,7 @@ const Footer = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   return (
-    <Grid container sx={{ backgroundColor: !isMobile ? 'rgb(245, 139, 98)' : '#cd6444 ', padding:  '50px 40px', color: '#000' }} className={style.FooterContain}>
+    <Grid container sx={{ backgroundColor: !isMobile ? '#e79595' : '#cd6444 ', padding:  '50px 40px', color: '#000' }} className={style.FooterContain}>
       <Grid item lg={12} xl={12} md={12} sm={12} xs={12} mb={ isMobile ? 2 : 0 }>
        <Grid container spacing={!isMobile ? 30 : 0}>
        <Grid item lg={7} xl={7} md={7} sm={12} xs={12} className={style.FCS} mb={ isMobile ? 4 : 0}>

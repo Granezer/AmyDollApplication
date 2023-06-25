@@ -4,6 +4,7 @@ import TopNav from './features/header/TopNav';
 import LandingPage from './features/landingPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Payment from './features/payment';
+import Product from './features/products';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/payment' element={<Payment />} />
+          <Route path='/product' element={<Product />} />
         </Routes>
       </Router>
       <Footer />

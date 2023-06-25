@@ -9,7 +9,7 @@ const Product = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down('md'))
     return (
         <Grid container p={!isMobile ? 5 : 2} rowGap={!isMobile ? 5 : isMobile ? 4 : 5}>
-            <Grid item lg={12} sm={12} xs={12} xl={12} md={12} sx={{ textAlign: 'center', p: '10px 0', fontWeight: '700', color: !isMobile ? 'black' : 'white', backgroundColor: !isMobile ? 'rgb(228, 132, 76)' : '#cd6444 !important', fontSize: !isMobile ? '40px' : isMobile ? '30px' : '35px' }}>Available Products</Grid>
+            <Grid item lg={12} sm={12} xs={12} xl={12} md={12} sx={{ textAlign: 'center', p: '10px 0', fontWeight: '700', color: !isMobile ? 'black' : 'white', backgroundColor: !isMobile ? '#e79595' : '#cd6444 !important', fontSize: !isMobile ? '40px' : isMobile ? '30px' : '35px' }}>Available Products</Grid>
             <Grid item lg={12} sm={12} xs={12} xl={12} md={12}>
                 <Grid container spacing={!isMobile ? 10 : isMobile ? 1 : 0}>
                     {Array.from({ length: isMobile ? 3 : !isMobile ? 4 : 4 }).map((_, index) => (

@@ -6,7 +6,7 @@ const BookSession = () => {
 
   return (
     <Grid container>
-      <Grid item lg={12} sm={12} xs={12} xl={12} md={12} sx={{ alignSelf: 'center', textAlign: 'center', p: '10px 0', fontWeight: '700', color: !isMobile ? 'black' : 'white', backgroundColor: !isMobile ? 'rgb(228, 132, 76)' : '#cd6444 !important', fontSize: !isMobile ? '40px' : isMobile ? '30px' : '35px' }}>Book Session</Grid>
+      <Grid item lg={12} sm={12} xs={12} xl={12} md={12} sx={{ alignSelf: 'center', textAlign: 'center', p: '10px 0', fontWeight: '700', color: !isMobile ? 'black' : 'white', backgroundColor: !isMobile ? '#e79595' : '#cd6444 !important', fontSize: !isMobile ? '40px' : isMobile ? '30px' : '35px' }}>Book Session</Grid>
       <Grid item lg={12} sm={12} xs={12} xl={12} md={12} pt={5} pl={ !isMobile ? 20 : 5} pr={ !isMobile ? 20 : 5}>
         <form style={{ backgroundColor: 'rgb(161, 159, 159)', borderRadius: '16px', padding: !isMobile ? '40px 50px' : '20px 30px' }} action="">
           <Grid container spacing={5}>
