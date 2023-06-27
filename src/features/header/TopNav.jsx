@@ -28,7 +28,7 @@ export const cartItems = async (value) => {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const handleQuantity = (items, setQuantity) => {
+export const handleQuantity = (items = [], setQuantity) => {
   let totalQuantity = 0;
   items.forEach((item) => {
     totalQuantity += item.quantity;
@@ -95,7 +95,7 @@ const TopNav = () => {
         <Grid container sx={{ backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center', padding: '10px 20px' }}>
           <Grid item lg={12} xl={12} xs={12} sm={12} md={12}>
             <Grid container spacing={0.5}>
-              <Grid item sm={6} md={6} xs={4} sx={{ fontSize: '18px', fontWeight: '700', color: '#cd6444', textAlign: 'start' }}>Amy Doll</Grid>
+              <Grid item sm={6} md={6} xs={4} sx={{ fontSize: '18px', fontWeight: '700', color: '#cd6444', textAlign: 'start' }}><a href='/' style={{ textDecoration: 'none', color: '#cd6444' }}>Amy Doll</a></Grid>
               <Grid item sm={5} md={5} xs={6} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#cd6444' }}>
                 <Typography sx={{ color: '#cd6444 !important', fontSize: '16px', fontWeight: '900' }}>Book Session</Typography>
               </Grid>
