@@ -5,6 +5,7 @@ import LandingPage from './features/landingPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Payment from './features/payment';
 import Product from './features/products';
+import SingleProductCard from './features/reusables/SingleProductCard';
 
 function App() {
 
@@ -14,8 +15,9 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          <Route path='/payment' element={<Payment />} />
+          <Route path='/initiate-payment' element={<Payment />} />
           <Route path='/product' element={<Product />} />
+          <Route path='/single-product' element={<SingleProductCard />} />
         </Routes>
       </Router>
       <Footer />

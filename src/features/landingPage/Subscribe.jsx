@@ -1,7 +1,30 @@
 import style from './styles/Subscribe.module.css'
 import { useTheme, useMediaQuery, Grid, Button, Typography } from '@mui/material';
+import { useState } from 'react';
+import axios from 'axios'
 
 const Subscribe = () => {
+  const [data, setData] = useState('');
+
+  const handleChange = (e) => {
+    setData(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  console.log(e.target.value)
+    axios
+      .post('http://localhost:8000/email', {
+        email: data.email,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   return (
@@ -10,10 +33,10 @@ const Subscribe = () => {
         <Grid item lg={12} xl={12} sm={12} xs={12} md={12} sx={{ p: '10px 10px', borderRadius: '60px', backgroundColor: !isMobile ? 'rgb(245, 139, 98)' : '#cd6444 ', width: !isMobile ? '900px' : '500px' }}>
           <Grid container>
             <Grid item lg={9} xl={9} sm={9} xs={9} md={9} sx={{ display: 'flex', alignItems: 'center'  }}>
-              <input  className={style.SCFI} style={{ fontSize: !isMobile ? '18px' : '14px', borderRadius: '30px', fontWeight: '600', p: '15px', border: 'none', width: '100%' }} type="text" placeholder="Enter your email address" />
+              <input className={style.SCFI} style={{ fontSize: !isMobile ? '18px' : '14px', borderRadius: '30px', fontWeight: '600', p: '15px', border: 'none', width: '100%' }} type="text" placeholder="Enter your email address" value={data} onChange={()=> handleChange()} />
             </Grid>
             <Grid item lg={3} xl={3} sm={3} xs={3} md={3}>
-              <Button sx={{ color: 'black', backgroundColor:'white', fontSize: !isMobile ? '20px' : '12px', borderRadius: '30px', fontWeight: '600', p: '15px', border: 'none', width: '100%' }} className={style.SCFB}>SUBSCRIBE</Button>
+              <Button sx={{ color: 'black', backgroundColor:'white', fontSize: !isMobile ? '20px' : '12px', borderRadius: '30px', fontWeight: '600', p: '15px', border: 'none', width: '100%' }} className={style.SCFB} onSubmit={handleSubmit}>SUBSCRIBE</Button>
             </Grid>
           </Grid>
         </Grid>

@@ -15,7 +15,7 @@ const Hero = () => {
           </Grid>
           )}
           <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
-            <li style={{ listStyle: 'none' }}><a style={{ textDecoration: 'none', color: !isMobile ? '#000' : '#cd6444', fontSize: !isMobile ? '18px' : '16px', fontWeight: '700' }} href="#">Products</a></li>
+            <li style={{ listStyle: 'none' }}><a style={{ textDecoration: 'none', color: !isMobile ? '#000' : '#cd6444', fontSize: !isMobile ? '18px' : '16px', fontWeight: '700' }} href="/product">Products</a></li>
           </Grid>
           <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
             <li style={{ listStyle: 'none' }}><a style={{ textDecoration: 'none', color: !isMobile ? '#000' : '#cd6444', fontSize: !isMobile ? '18px' : '16px', fontWeight: '700' }} href="#">Spa</a></li>

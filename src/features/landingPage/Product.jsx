@@ -3,18 +3,45 @@ import style from './styles/Product.module.css';
 import Content from "../reusables/Content";
 import { useTheme, useMediaQuery, Grid, Button, Typography } from '@mui/material';
 import ThreeGirl from '../../assets/image/ThreeGirl.png'
+import { getAllProducts } from '../../api/Api';
+import { useState, useCallback, useEffect } from "react";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
+    const navigate = useNavigate()
     const theme = useTheme()
     const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+
+    const[data, setData] = useState([])
+
+    const fetchProducts = useCallback(async()=>{
+        try {
+            const response = await axios.get(getAllProducts)
+            if(response.status === 200){
+                const limitedData = response.data.response.data.slice(0, 4);
+                setData(limitedData);
+            }else{
+                console.log('Unable to fetch data')
+            }
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
+    }, [])
+    
+    useEffect(()=>{
+        fetchProducts()
+    }, [fetchProducts]);
+
     return (
         <Grid container p={!isMobile ? 5 : 2} rowGap={!isMobile ? 5 : isMobile ? 4 : 5}>
             <Grid item lg={12} sm={12} xs={12} xl={12} md={12} sx={{ textAlign: 'center', p: '10px 0', fontWeight: '700', color: !isMobile ? 'black' : 'white', backgroundColor: !isMobile ? '#e79595' : '#cd6444 !important', fontSize: !isMobile ? '40px' : isMobile ? '30px' : '35px' }}>Available Products</Grid>
             <Grid item lg={12} sm={12} xs={12} xl={12} md={12}>
-                <Grid container spacing={!isMobile ? 10 : isMobile ? 1 : 0}>
-                    {Array.from({ length: isMobile ? 3 : !isMobile ? 4 : 4 }).map((_, index) => (
-                        <Grid item lg={3} sm={4} xs={12} xl={3} md={4} key={index}>
-                            <ProductCards image={Content[index].Image} name={Content[index].name} price={Content[index].price} />
+                <Grid container rowSpacing={!isMobile ? 5 : isMobile ? 3 : 0} columnSpacing={!isMobile ? 5 : isMobile ? 12 : 0}>
+                    {data.map((value, index) => (
+                        <Grid item lg={3} sm={6} xs={12} xl={3} md={6} key={index}>
+                            <ProductCards productId={value.id} image={Content[index].Image} name={value.name} price={value.price} />
                         </Grid>
                     ))}
                 </Grid>
@@ -28,7 +55,7 @@ const Product = () => {
                         <Typography sx={{ p: '0px 2px' , mb: '10px', fontSize: !isMobile ? '30px' : '14px', color: !isMobile ? 'rgb(228, 132, 76) !important' : '#cd6444 !important', fontWeight: '700' }}>
                             To see more Products for different skin tones
                         </Typography>
-                        <Button sx={{ borderRadius: '16px', color: 'white', backgroundColor: !isMobile ? 'rgb(228, 132, 76) !important' : '#cd6444 !important', fontSize: !isMobile ? '16px' : '12px', p: !isMobile ? '0px 20px' : '', fontWeight: '700' }}>Click Here</Button>
+                        <Button sx={{ borderRadius: '16px', color: 'white', backgroundColor: !isMobile ? 'rgb(228, 132, 76) !important' : '#cd6444 !important', fontSize: !isMobile ? '16px' : '12px', p: !isMobile ? '0px 20px' : '', fontWeight: '700' }} onClick={()=> navigate('/product')}>Click Here</Button>
                     </Grid>
                 </Grid>
             </Grid>

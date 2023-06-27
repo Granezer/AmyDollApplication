@@ -1,45 +1,60 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import './styles/Payment.css';
+import { useLocation } from 'react-router-dom';
+import { initiatePaymentUrl, getPaymentVerificationUrl } from '../../api/Api'
 
 const Payment = () => {
-    const [amount, setAmount] = useState('');
     const [email, setEmail] = useState('');
-    const [reference, setReference] = useState('');
+    // const [reference, setReference] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [data, setData] = useState()
+    const location = useLocation();
+    const { amount } = location.state;
 
-    const handlePaymentInitialize = async () => {
+    const handlePayment = useCallback(async () => {
       try {
-        const initializePaymentUrl = ''
-        const response = await axios.post(initializePaymentUrl, {
-          amount,
-          email,
-          firstName,
-          lastName,
-        });
-        const { authorization_url, reference } = response.data;
-        setReference(reference);
-
-        window.location.href = authorization_url;
+        const response = await axios.post(initiatePaymentUrl, { email, amount });
+        setData(response.data.response);
+        const { authorization_url, reference } = response.data.response;
+    
+        const newWindow = window.open(authorization_url, '_blank');
+    
+        const intervalId = setInterval(async () => {
+          if (newWindow.closed) {
+            clearInterval(intervalId);
+            await handlePaymentVerify(reference);
+          }
+        }, 1000);
       } catch (error) {
-        console.log('An error occurred while initializing payment:', error);
+        console.error('Failed to initialize payment:', error);
       }
-    };
+    }, [email, amount]);
 
-    const handlePaymentVerify = async () => {
+    useEffect(() => {
+      handlePayment();
+    }, [handlePayment]);
+
+    useEffect(() => {
+      console.log('Payment initialized:', data);
+    }, [data]);
+
+    const handlePaymentVerify = async (reference) => {
       try {
-        const verifyPaymentUrl = ""
-        const response = await axios.get(
-          `${verifyPaymentUrl}/${reference}`
-        );
-        console.log('Payment verification response:', response.data);
+        const url = getPaymentVerificationUrl(reference)
+        const response = await axios.get(url);
+        if(response.status === 200){
+          console.log('Payment verification successful !!!');
+        }else{
+          console.log('Payment failed')
+        }
       } catch (error) {
         console.log('An error occurred while verifying payment:', error);
       }
     };
 
-    const isFormValid = amount.trim() !== '' && email.trim() !== '';
+    // const isFormValid = amount.trim() !== '' && email.trim() !== '';
 
     return (
       <div className="container">
@@ -63,15 +78,6 @@ const Payment = () => {
           />
         </div>
         <div className="form-group">
-          <label className="label">Amount:</label>
-          <input
-            type="text"
-            className="input"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
           <label className="label">Email:</label>
           <input
             type="email"
@@ -80,21 +86,29 @@ const Payment = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+        <div className="form-group">
+          <label className="label">Amount:</label>
+          <input
+            type="email"
+            className="input"
+            value={amount}
+            disabled
+          />
+        </div>
         <button
           className="btn"
-          onClick={handlePaymentInitialize}
-          disabled={!isFormValid}
+          onClick={handlePayment}
         >
           Initialize Payment
         </button>
-        {reference && (
+        {/* {reference && (
           <div className="payment-result">
             <h2 className="subtitle">Payment Reference: {reference}</h2>
             <button className="btn" onClick={handlePaymentVerify}>
               Verify Payment
             </button>
           </div>
-        )}
+        )} */}
       </div> 
   )
 }
