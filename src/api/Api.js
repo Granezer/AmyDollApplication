@@ -1,4 +1,4 @@
-const baseUrl = "/api/amy-doll"
+const baseUrl = "https://amy-doll-backend.onrender.com/api/amy-doll"
 
 // product
 

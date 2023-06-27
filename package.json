@@ -1,6 +1,5 @@
 {
   "name": "any_doll_frontend",
-  "proxy": "https://amy-doll-backend.onrender.com",
   "private": true,
   "version": "1.0.0",
   "dependencies": {
