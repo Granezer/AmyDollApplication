@@ -4,7 +4,7 @@ export default function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:8000',
+      target: 'https://amy-doll-backend.onrender.com',
       changeOrigin: true,
     })
   );
