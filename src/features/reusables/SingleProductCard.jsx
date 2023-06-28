@@ -17,7 +17,7 @@ const SingleProductCard = () => {
   const theme = useTheme ();
   const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
   const location = useLocation ();
-  const {image, description, price, name} = location.state;
+  const {image_, description, price, name} = location.state;
 
   const handleQuantityIncrement = () => {
     setQuantity (prevState => prevState + 1);
@@ -73,7 +73,7 @@ const SingleProductCard = () => {
             flexDirection: 'row',
           }}
         >
-          <img src={image} alt="image" style={{ width: isMobile ? '200px' : ''}} />
+          <img src={image_} alt="image_" style={{ width: isMobile ? '200px' : ''}} />
         </Grid>
         <Grid
           item

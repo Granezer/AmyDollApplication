@@ -75,11 +75,11 @@ const TopNav = () => {
   useEffect(() => {
     fetchCartItems();
     cartItems(items)
-  }, []);
+  }, [items]);
   
   useEffect(() => {
     handleQuantity();
-  }, [items]);
+  }, [items, handleQuantity]);
 
   console.log('Items --> ', items);
   console.log('Quantity --> ', quantity);

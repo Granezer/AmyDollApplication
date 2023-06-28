@@ -40,7 +40,7 @@ const ProductCards = props => {
   };
   
   const handleBuyNow = () => {
-    navigate('/single-product', { state: {image: props.image, name: props.name, price: props.price, description: props.description } });
+    navigate('/single-product', { state: {image_: props.image, name: props.name, price: props.price, description: props.description } });
   };
 
   return (
