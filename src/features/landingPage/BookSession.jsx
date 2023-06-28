@@ -49,7 +49,7 @@ const BookSession = () => {
           p: '10px 0',
           fontWeight: '700',
           color: !isMobile ? 'black' : 'white',
-          backgroundColor: !isMobile ? '#e79595' : '#cd6444 !important',
+          backgroundColor: '#e79595',
           fontSize: !isMobile ? '40px' : isMobile ? '30px' : '35px',
         }}
       >
@@ -190,7 +190,7 @@ const BookSession = () => {
                   height: '50px',
                   width: !isMobile ? '90%' : '100%',
                   color: 'black',
-                  backgroundColor: !isMobile ? 'rgb(228, 132, 76)' : '#cd6444',
+                  backgroundColor: '#e79595',
                   borderRadius: '8px',
                   border: 'none',
                   padding: '5px 15px',

@@ -36,7 +36,7 @@ const Product = () => {
 
     return (
         <Grid container p={!isMobile ? 5 : 2} rowGap={!isMobile ? 5 : isMobile ? 4 : 5}>
-            <Grid item lg={12} sm={12} xs={12} xl={12} md={12} sx={{ textAlign: 'center', p: '10px 0', fontWeight: '700', color: !isMobile ? 'black' : 'white', backgroundColor: !isMobile ? '#e79595' : '#cd6444 !important', fontSize: !isMobile ? '40px' : isMobile ? '30px' : '35px' }}>Available Products</Grid>
+            <Grid item lg={12} sm={12} xs={12} xl={12} md={12} sx={{ textAlign: 'center', p: '10px 0', fontWeight: '700', color: !isMobile ? 'black' : 'white', backgroundColor: '#e79595', fontSize: !isMobile ? '40px' : isMobile ? '30px' : '35px' }}>Available Products</Grid>
             <Grid item lg={12} sm={12} xs={12} xl={12} md={12}>
                 <Grid container rowSpacing={!isMobile ? 5 : isMobile ? 3 : 0} columnSpacing={!isMobile ? 5 : isMobile ? 12 : 0}>
                     {data.map((value, index) => (
@@ -52,10 +52,10 @@ const Product = () => {
                         <img src={ThreeGirl} style={{ width: isMobile ? '80%' : '' }} alt="" />
                     </Grid>
                     <Grid item lg={4} sm={5} xs={5} xl={4} md={5} sx={{ pl: '5px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }} p={isMobile ? '10px' : ''}>
-                        <Typography sx={{ p: '0px 2px' , mb: '10px', fontSize: !isMobile ? '30px' : '14px', color: !isMobile ? 'rgb(228, 132, 76) !important' : '#cd6444 !important', fontWeight: '700' }}>
+                        <Typography sx={{ p: '0px 2px' , mb: '10px', fontSize: !isMobile ? '30px' : '14px', color: '#e79595', fontWeight: '700' }}>
                             To see more Products for different skin tones
                         </Typography>
-                        <Button sx={{ borderRadius: '16px', color: 'white', backgroundColor: !isMobile ? 'rgb(228, 132, 76) !important' : '#cd6444 !important', fontSize: !isMobile ? '16px' : '12px', p: !isMobile ? '0px 20px' : '', fontWeight: '700' }} onClick={()=> navigate('/product')}>Click Here</Button>
+                        <Button sx={{ borderRadius: '16px', color: 'white', backgroundColor: '#e79595', fontSize: !isMobile ? '16px' : '12px', p: !isMobile ? '0px 20px' : '', fontWeight: '700' }} onClick={()=> navigate('/product')}>Click Here</Button>
                     </Grid>
                 </Grid>
             </Grid>
