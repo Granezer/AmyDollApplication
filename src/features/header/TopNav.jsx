@@ -8,54 +8,77 @@ import SearchMd from '../../assets/image/SearchMd.svg';
 import { getAllCartItemsUrl } from '../../api/Api'
 import axios from 'axios';
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const fetchCartItems = async (setItems) => {
-  try {
-    const response = await axios.get(getAllCartItemsUrl);
-    if (response.status === 200) {
-      setItems(response.data.response.data);
-    } else {
-      throw new Error(response.message);
-    }
-  } catch (error) {
-    console.error('Failed to fetch cart items:', error);
-  }
-};
+// export const fetchCartItems = async (setItems) => {
+//   try {
+//     const response = await axios.get(getAllCartItemsUrl);
+//     if (response.status === 200) {
+//       setItems(response.data.response.data);
+//     } else {
+//       throw new Error(response.message);
+//     }
+//   } catch (error) {
+//     console.error('Failed to fetch cart items:', error);
+//   }
+// };
 
-// eslint-disable-next-line react-refresh/only-export-components
+// export const cartItems = async (value) => {
+//   return value.length
+// }
+
+// export const handleQuantity = (items = [], setQuantity) => {
+//   let totalQuantity = 0;
+//   items.forEach((item) => {
+//     totalQuantity += item.quantity;
+//     console.log('Items quantity --> ', item.quantity, " total quantity --> ", totalQuantity)
+//   })
+//   console.log("\n total quantity --> ", totalQuantity)
+//   setQuantity(totalQuantity);
+// };
+
 export const cartItems = async (value) => {
   return value.length
 }
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const handleQuantity = (items = [], setQuantity) => {
-  let totalQuantity = 0;
-  items.forEach((item) => {
-    totalQuantity += item.quantity;
-    console.log('Items quantity --> ', item.quantity, " total quantity --> ", totalQuantity)
-  })
-  console.log("\n total quantity --> ", totalQuantity)
-  setQuantity(totalQuantity);
-};
 
 const TopNav = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [searchProduct, setsearchProduct] = useState();
-  const[items, setItems] = useState([])
+  const [items, setItems] = useState([]);
   const [quantity, setQuantity] = useState(0);
-
+  
   const handleChange = (e) => {
     setsearchProduct(e.target.value);
-  }
-
+  };
+  
+  const fetchCartItems = async () => {
+    try {
+      const response = await axios.get(getAllCartItemsUrl);
+      if (response.status === 200) {
+        setItems(response.data.response.data);
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      console.error('Failed to fetch cart items:', error);
+    }
+  };
+  
+  const handleQuantity = () => {
+    let totalQuantity = 0;
+    const itemsArray = Array.from(items);
+    itemsArray.forEach((item) => {
+      totalQuantity += item.quantity;
+    });
+    setQuantity(totalQuantity)
+  };
+  
   useEffect(() => {
-    fetchCartItems(setItems);
+    fetchCartItems();
     cartItems(items)
-  }, [items]);
-
+  }, []);
+  
   useEffect(() => {
-    handleQuantity(items, setQuantity);
+    handleQuantity();
   }, [items]);
 
   console.log('Items --> ', items);

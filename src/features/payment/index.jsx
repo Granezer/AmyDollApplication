@@ -17,6 +17,7 @@ const Payment = () => {
       try {
         const response = await axios.post(initiatePaymentUrl, { email, amount });
         setData(response.data.response);
+        console.log("payment response --> ", response)
         const { authorization_url, reference } = response.data.response;
     
         const newWindow = window.open(authorization_url, '_blank');
