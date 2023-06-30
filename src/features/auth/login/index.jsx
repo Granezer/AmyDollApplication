@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles/Login.css';
 import { loginUrl } from '../../../api/Api';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ function Login() {
         console.log('values --> ', value)
       const response = await axios.post(loginUrl, value);
       if(response.status === 200){
-        navigate('/admin/dashbord')
+        navigate('/dashboard')
         console.log('successful --> ', response)
       }else{
         console.log('Failed to login')
@@ -69,8 +69,8 @@ function Login() {
         <input type="submit" className="submit-button" />
 
         <p className="register-link">
-          Don't have an account? <a className='register' href="/register">Register</a>
-        </p>
+  Don't have an account? <Link to="/register" className='register'>Register</Link>
+</p>
       </form>
     </div>
   );

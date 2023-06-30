@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import './styles/Register.css';
 import {registerUrl} from '../../../api/Api';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+
 
 function Register () {
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Register () {
     try {
       const response = await axios.post (registerUrl, value);
       if(response.status === 200){
-        navigate('/admin/dashbord')
+        navigate('/dashboard')
         console.log('successful --> ', response)
       }else{
         console.log('Failed to login')
@@ -140,8 +141,8 @@ function Register () {
         <input type="submit" value="Register" className="submit-button" />
 
         <p className="login-link">
-          Already have an account? <a href="/login">Login</a>
-        </p>
+  Already have an account? <Link to="/login">Login</Link>
+</p>
       </form>
     </div>
   );

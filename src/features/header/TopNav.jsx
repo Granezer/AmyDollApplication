@@ -6,13 +6,14 @@ import { useTheme, useMediaQuery, Grid, Typography } from '@mui/material';
 import Logo from '../../assets/image/Logo.jpeg';
 import { getAllCartItemsUrl } from '../../api/Api'
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const cartItems = async (value) => {
   return value.length
 }
 
 const TopNav = () => {
+  const navigate = useNavigate()
   const location = useLocation()
   const hideButton = location.pathname === '/admin/dashbord'
   const theme = useTheme()
@@ -76,6 +77,7 @@ const TopNav = () => {
             <Grid container>
               <Grid item lg={11} xl={11} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Typography sx={{ color: '#000', fontSize: '20px', fontWeight: '700' }}>Book Session</Typography>
+                <button onClick={()=> navigate('/login')}>login</button>
               </Grid>
               {!hideButton &&(
                 <Grid item lg={1} xl={1} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
