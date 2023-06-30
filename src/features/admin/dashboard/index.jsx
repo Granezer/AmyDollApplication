@@ -15,24 +15,23 @@ const AdminDashboard = () => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
+    if (isMobile) {
+      setIsDrawerOpen(false);
+    }
   };
 
   const handleDrawerToggle = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
-//   // Access the session ID from Redux store
-//   const sessionId = useSelector((state) => state.session.sessionId);
-
   return (
     <div className="admin-dashboard">
       <TopNav />
-      {isMobile ? (
+      {/* {isMobile ? (
         <IconButton onClick={handleDrawerToggle}>
           <MenuIcon fontSize={'medium'} htmlColor="#453AEF" />
         </IconButton>
       ) : (
-
         <div className="inner-dasboard">
           <div className="sidebar">
             <div
@@ -47,29 +46,34 @@ const AdminDashboard = () => {
             >
               Upload Product
             </div>
-            {/* <div
-              className={`sidebar-option ${selectedOption === 'orders' ? 'active' : ''}`}
-              onClick={() => handleOptionClick('orders')}
-            >
-              Orders
-            </div> */}
           </div>
-              <div className="content">
-              {selectedOption === 'products' && (
-                <div className="centered-content">
-                  <Product />
+          <div className="content">
+            {selectedOption === 'products' && (
+              <div className="centered-content">
+                <Product />
+              </div>
+            )}
+            {selectedOption === 'upload' && (
+              <div className="centered-content">
+                <ProductUpload />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+      {isMobile && (
+                  <div className="content">
+                  {selectedOption === 'products' && (
+                    <div className="centered-content">
+                      <Product />
+                    </div>
+                  )}
+                  {selectedOption === 'upload' && (
+                    <div className="centered-content">
+                      <ProductUpload />
+                    </div>
+                  )}
                 </div>
-              )}
-              {selectedOption === 'upload' && (
-                <div className="centered-content">
-                  <ProductUpload />
-                </div>
-              )}
-              {/* {selectedOption === 'orders' && (
-                  <div className="centered-content">Orders content goes here</div>
-                )} */}
-            </div>
-            </div>
       )}
 
       <Drawer anchor="left" open={isDrawerOpen} onClose={handleDrawerToggle}>
@@ -92,17 +96,87 @@ const AdminDashboard = () => {
           >
             Upload Product
           </div>
-          {/* <div
+        </div>
+      </Drawer> */}
+     <div className="inner-dashboard" style={{ display: isMobile ? '' : 'flex' }}>
+     {isMobile && (
+        <IconButton onClick={handleDrawerToggle}>
+          <MenuIcon fontSize={'medium'} htmlColor="#e79595" />
+        </IconButton>
+      )}
+        {isMobile && (
+          <Drawer anchor="left" open={isDrawerOpen} onClose={handleDrawerToggle}>
+            <div className="sidebar">
+              <div
+                className={`sidebar-option ${selectedOption === 'products' ? 'active' : ''}`}
+                onClick={() => {
+                  handleOptionClick('products');
+                  handleDrawerToggle();
+                }}
+              >
+                Products
+              </div>
+              <div
+                className={`sidebar-option ${selectedOption === 'upload' ? 'active' : ''}`}
+                onClick={() => {
+                  handleOptionClick('upload');
+                  handleDrawerToggle();
+                }}
+              >
+                Upload Product
+              </div>
+              {/* <div
+                className={`sidebar-option ${selectedOption === 'orders' ? 'active' : ''}`}
+                onClick={() => {
+                  handleOptionClick('orders');
+                  handleDrawerToggle();
+                }}
+              >
+                Orders
+              </div> */}
+            </div>
+          </Drawer>
+        )}
+
+        {!isMobile && (
+          <div className="sidebar">
+            <div
+              className={`sidebar-option ${selectedOption === 'products' ? 'active' : ''}`}
+              onClick={() => handleOptionClick('products')}
+            >
+              Products
+            </div>
+            <div
+              className={`sidebar-option ${selectedOption === 'upload' ? 'active' : ''}`}
+              onClick={() => handleOptionClick('upload')}
+            >
+              Upload Product
+            </div>
+            {/* <div
               className={`sidebar-option ${selectedOption === 'orders' ? 'active' : ''}`}
-              onClick={() => {
-                handleOptionClick('orders');
-                handleDrawerToggle();
-              }}
+              onClick={() => handleOptionClick('orders')}
             >
               Orders
             </div> */}
+          </div>
+        )}
+
+        <div className="content">
+          {selectedOption === 'products' && (
+            <div className="centered-content">
+              <Product />
+            </div>
+          )}
+          {selectedOption === 'upload' && (
+            <div className="centered-content">
+              <ProductUpload />
+            </div>
+          )}
+          {/* {selectedOption === 'orders' && (
+            <div className="centered-content">Orders content goes here</div>
+          )} */}
         </div>
-      </Drawer>
+      </div>
       <Footer />
     </div>
   );

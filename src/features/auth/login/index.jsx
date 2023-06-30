@@ -68,9 +68,9 @@ function Login() {
 
         <input type="submit" className="submit-button" />
 
-        <p className="register-link">
+        {/* <p className="register-link">
   Don't have an account? <Link to="/register" className='register'>Register</Link>
-</p>
+</p> */}
       </form>
     </div>
   );

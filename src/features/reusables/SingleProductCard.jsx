@@ -17,7 +17,7 @@ const SingleProductCard = () => {
   const theme = useTheme ();
   const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
   const location = useLocation ();
-  const {image_, description, price, name} = location.state;
+  const {image_, description, price, salesPrice, name} = location.state;
 
   const handleQuantityIncrement = () => {
     setQuantity (prevState => prevState + 1);
@@ -32,7 +32,7 @@ const SingleProductCard = () => {
   };
 
   const handleBuyNow = () => {
-    navigate ('/initiate-payment', {state: {amount: price * quantity}});
+    navigate ('/initiate-payment', {state: {amount: salesPrice * quantity}});
   };
 
   return (
@@ -73,7 +73,7 @@ const SingleProductCard = () => {
             flexDirection: 'row',
           }}
         >
-          <img src={image_} alt="image_" style={{ width: isMobile ? '200px' : ''}} />
+          <img src={image_} alt="image_" style={{ width: isMobile ? '400px' : ''}} />
         </Grid>
         <Grid
           item
@@ -100,10 +100,10 @@ const SingleProductCard = () => {
                 sx={{
                   color: 'brown',
                   fontWeight: '700',
-                  fontSize: isMobile ? '16px' : '24px',
+                  fontSize: isMobile ? '16px' : '20px',
                 }}
               >
-                {description}
+                {description.length > 200 ? description.slice(0, 200) + '...' : description}
               </Typography>
               <Box
                 sx={{
@@ -126,15 +126,26 @@ const SingleProductCard = () => {
               </Box>
             </Grid>
             <Grid item lg={12} xs={12} sm={12} md={12} xl={12}>
-              <Typography
-                sx={{
-                  color: '#000',
-                  fontWeight: '700',
-                  fontSize: isMobile ? '16px' : '24px',
-                }}
-              >
-                &#8358; {price}
-              </Typography>
+            <Typography
+          mb={isMobile ? 1 : 2}
+          sx={{
+            color: '#000',
+            fontWeight: '700',
+            fontSize: isMobile ? '15px' : '18px',
+          }}
+        >
+          Price &#8358; {price}
+        </Typography>
+        <Typography
+          mb={isMobile ? 1 : 2}
+          sx={{
+            color: '#000',
+            fontWeight: '700',
+            fontSize: isMobile ? '15px' : '18px',
+          }}
+        >
+          Sales Price &#8358; {salesPrice}
+        </Typography>
             </Grid>
             <Grid item lg={12} xs={12} sm={12} md={12} xl={12}>
               <Grid container mb={4}>

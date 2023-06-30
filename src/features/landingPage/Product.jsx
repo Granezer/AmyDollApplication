@@ -42,7 +42,7 @@ const Product = () => {
                 <Grid container rowSpacing={!isMobile ? 5 : isMobile ? 3 : 0} columnSpacing={!isMobile ? 5 : isMobile ? 12 : 0}>
                     {data.map((value, index) => (
                         <Grid item lg={3} sm={6} xs={12} xl={3} md={6} key={index}>
-                            <ProductCards productId={value.id} image={value.image} name={value.name} price={value.price} />
+                            <ProductCards productId={value.id} image={value.image} name={value.name} price={value.price} salesPrice={value.salesPrice} description={value.description} />
                         </Grid>
                     ))}
                 </Grid>

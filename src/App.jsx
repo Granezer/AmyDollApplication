@@ -10,6 +10,7 @@ import Login from './features/auth/login';
 import Register from './features/auth/register';
 import ProductUpload from './features/admin/productUpload';
 import AdminDashboard from './features/admin/dashboard';
+import NotFound from './features/reusables/NotFound';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function AppContent() {
         <Route path="/product" element={<Product />} />
         <Route path="/single-product" element={<SingleProductCard />} />
         <Route path="/*" element={<LandingPage />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       {!hideTopNavFooter && <Footer />}
     </div>

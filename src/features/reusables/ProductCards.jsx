@@ -47,7 +47,7 @@ const ProductCards = props => {
   };
   
   const handleBuyNow = () => {
-    navigate('/single-product', { state: {image_: props.image, name: props.name, price: props.price, description: props.description } });
+    navigate('/single-product', { state: {image_: props.image, name: props.name, price: props.price, salesPrice: props.salesPrice, description: props.description } });
   };
 
   return (
@@ -60,7 +60,7 @@ const ProductCards = props => {
         sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
       >
         <img
-          style={{width: isMobile ? '150px' : '170px' }}
+          style={{width: isMobile ? '400px' : '400px', height: isMobile ? '200px' : '200px' }}
           src={props.image}
           alt="Product"
         />
@@ -94,10 +94,20 @@ const ProductCards = props => {
           sx={{
             color: '#000',
             fontWeight: '700',
-            fontSize: isMobile ? '18px' : '25px',
+            fontSize: isMobile ? '15px' : '15px',
           }}
         >
-          &#8358; {props.price}
+          Price &#8358; {props.price}
+        </Typography>
+        <Typography
+          mb={isMobile ? 1 : 2}
+          sx={{
+            color: '#000',
+            fontWeight: '700',
+            fontSize: isMobile ? '15px' : '15px',
+          }}
+        >
+          Sales Price &#8358; {props.salesPrice}
         </Typography>
         {!hideButton && (<Button
           sx={{

@@ -8,6 +8,7 @@ const ProductUpload = () => {
   const initialValue = {
     name: '',
     price: '',
+    salesPrice: '',
     description: '',
     image: null,
   };
@@ -27,6 +28,7 @@ const ProductUpload = () => {
       const formData = new FormData();
       formData.append('name', value.name);
       formData.append('price', value.price);
+      formData.append('salesPrice', value.salesPrice);
       formData.append('description', value.description);
       if (value.image) {
         formData.append('image', value.image);
@@ -37,6 +39,7 @@ const ProductUpload = () => {
       const response = await axios.post(createProductUrl, formData);
       if (response.status === 200) {
         console.log('Product upload response:', response);
+        setValue(initialValue)
       } else {
         console.error('Product upload failed');
       }
@@ -75,6 +78,16 @@ const ProductUpload = () => {
               id="price"
               name="price"
               value={value.price}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="salesPrice">Sales Price:</label>
+            <input
+              type="number"
+              id="salesPrice"
+              name="salesPrice"
+              value={value.salesPrice}
               onChange={handleChange}
             />
           </div>

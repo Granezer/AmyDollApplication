@@ -6,8 +6,7 @@ import axios from 'axios';
 
 const Product = () => {
     const theme = useTheme()
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-    // const spacer = location.pathname === 
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
     const[data, setData] = useState([])
 
@@ -38,7 +37,7 @@ const Product = () => {
             <Grid container spacing={{xl: 3, lg: 3, md: 3, sm: 5, xs: 2}}>
                     {data.map((value, index) => (
                         <Grid item lg={3} sm={6} xs={12} xl={3} md={4} key={value.id}>
-                            <ProductCards productId={value.id} image={value.image} name={value.name} price={value.price} />
+                            <ProductCards productId={value.id} image={value.image} name={value.name} price={value.price} salesPrice={value.salesPrice} description={value.description} />
                         </Grid>
                     ))}
             </Grid>
