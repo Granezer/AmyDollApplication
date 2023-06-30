@@ -10,9 +10,9 @@ import Login from './features/auth/login';
 import Register from './features/auth/register';
 import ProductUpload from './features/admin/productUpload';
 import AdminDashboard from './features/admin/dashboard';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSessionId } from './features/store/sessionAction';
+// import React, { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { setSessionId } from './features/store/sessionAction';
 
 function App() {
   return (
@@ -26,21 +26,21 @@ function AppContent() {
   const location = useLocation();
   const hideTopNavFooter = location.pathname === '/admin/login' || location.pathname === '/admin/register' || location.pathname === '/admin/product-upload' || location.pathname === '/admin/dashbord';
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    const sessionId = generateSessionId();
-    dispatch(setSessionId(sessionId));
-  }, []);
+  // useEffect(() => {
+  //   const sessionId = generateSessionId();
+  //   dispatch(setSessionId(sessionId));
+  // }, []);
 
-  const generateSessionId = () => {
-    const timestamp = Date.now().toString(); 
-    const randomString = Math.random().toString(36).substr(2);
+  // const generateSessionId = () => {
+  //   const timestamp = Date.now().toString(); 
+  //   const randomString = Math.random().toString(36).substr(2);
   
-    return timestamp + randomString;
-  };
+  //   return timestamp + randomString;
+  // };
 
-  console.log('Session id --> ', generateSessionId())
+  // console.log('Session id --> ', generateSessionId())
 
   return (
     <div>
