@@ -27,7 +27,6 @@ function AppContent() {
   const hideTopNavFooter = location.pathname === '/admin/login' || location.pathname === '/admin/register' || location.pathname === '/admin/product-upload' || location.pathname === '/admin/dashbord';
 
   // const dispatch = useDispatch();
-
   // useEffect(() => {
   //   const sessionId = generateSessionId();
   //   dispatch(setSessionId(sessionId));

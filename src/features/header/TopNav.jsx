@@ -77,10 +77,12 @@ const TopNav = () => {
               <Grid item lg={11} xl={11} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Typography sx={{ color: '#000', fontSize: '20px', fontWeight: '700' }}>Book Session</Typography>
               </Grid>
-{!hideButton &&(              <Grid item lg={1} xl={1} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              {!hideButton &&(
+                <Grid item lg={1} xl={1} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src={CartIcon} alt='CartIcon' />
                 {/* <span style={{ color: 'black', fontSize: '20px', fontWeight: '700', backgroundColor: 'transparent', marginTop: '-15px', borderRadius: '50%' }}>{quantity}</span> */}
-              </Grid>)}
+              </Grid>
+              )}
             </Grid>
           </Grid>
         </Grid>

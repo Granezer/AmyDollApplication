@@ -1,5 +1,5 @@
 import style from './styles/Hero.module.css';
-import {useTheme, useMediaQuery, Grid} from '@mui/material';
+import { useTheme, useMediaQuery, Grid } from '@mui/material';
 import BgLarge from '../../assets/image/BgLarge.jpeg';
 import BgMid from '../../assets/image/BgMd.jpeg';
 
