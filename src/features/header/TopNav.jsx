@@ -94,7 +94,7 @@ const TopNav = () => {
               <Grid item sm={5} md={5} xs={6} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#cd6444' }}>
                 <Typography sx={{ color: '#000 !important', fontSize: '18px', fontWeight: '900' }}>Book Session</Typography>
               </Grid>
-{!hideButton(              <Grid item sm={1} md={1} xs={2} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+{!hideButton &&(              <Grid item sm={1} md={1} xs={2} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src={CartIcon} alt='CartIcon' />
                 {/* <span style={{ color: '#000', fontSize: '16px', fontWeight: '700', backgroundColor: 'transparent', marginTop: '-15px', borderRadius: '50%' }}>{quantity}</span> */}
               </Grid>)}
