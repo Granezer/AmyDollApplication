@@ -1,13 +1,16 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
 import style from './styles/Hero.module.css';
 import { useTheme, useMediaQuery, Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 import BgLarge from '../../assets/image/BgLarge.jpeg';
 import BgMid from '../../assets/image/BgMd.jpeg';
 
 const Hero = () => {
-  const theme = useTheme ();
-  const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
-  const isSmScreen = useMediaQuery (theme.breakpoints.between (960, 500));
-  const isXSScreen = useMediaQuery (theme.breakpoints.down(500));
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmScreen = useMediaQuery(theme.breakpoints.between(960, 500));
+  const isXSScreen = useMediaQuery(theme.breakpoints.down(500));
 
   return (
     <Grid
@@ -32,100 +35,103 @@ const Hero = () => {
           height: !isMobile ? '50px' : '50px',
         }}
       >
-        <Grid Container display={'flex'} p="10px 10px" textAlign="center">
-          {!isMobile &&
+        <Grid Container display="flex" p="10px 10px" textAlign="center">
+          {!isMobile && (
             <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
-              <li style={{listStyle: 'none'}}>
-                <a
+              <li style={{ listStyle: 'none' }}>
+                <Link
+                  to="/services-offered"
                   style={{
                     textDecoration: 'none',
                     color: '#000',
                     fontSize: !isMobile ? '18px' : '16px',
                     fontWeight: '700',
                   }}
-                  href="#"
                 >
                   Services Offered
-                </a>
+                </Link>
               </li>
-            </Grid>}
+            </Grid>
+          )}
           <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
-            <li style={{listStyle: 'none'}}>
-              <a
+            <li style={{ listStyle: 'none' }}>
+              <Link
+                to="/product"
                 style={{
                   textDecoration: 'none',
                   color: '#000',
                   fontSize: !isMobile ? '18px' : '16px',
                   fontWeight: '700',
                 }}
-                href="/product"
               >
                 Products
-              </a>
+              </Link>
             </li>
           </Grid>
           <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
-            <li style={{listStyle: 'none'}}>
-              <a
+            <li style={{ listStyle: 'none' }}>
+              <Link
+                to="/spa"
                 style={{
                   textDecoration: 'none',
                   color: '#000',
                   fontSize: !isMobile ? '18px' : '16px',
                   fontWeight: '700',
                 }}
-                href="#"
               >
                 Spa
-              </a>
+              </Link>
             </li>
           </Grid>
           <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
-            <li style={{listStyle: 'none'}}>
-              <a
+            <li style={{ listStyle: 'none' }}>
+              <Link
+                to="/saloon"
                 style={{
                   textDecoration: 'none',
                   color: '#000',
                   fontSize: !isMobile ? '18px' : '16px',
                   fontWeight: '700',
                 }}
-                href="#"
               >
                 Saloon
-              </a>
+              </Link>
             </li>
           </Grid>
-          {!isMobile &&
+          {!isMobile && (
             <Grid item lg={2.4} xl={2.4} sm={5} xs={5} md={5}>
-              <li style={{listStyle: 'none'}}>
-                <a
+              <li style={{ listStyle: 'none' }}>
+                <Link
+                  to="/pedicure-medicure"
                   style={{
                     textDecoration: 'none',
                     color: '#000',
                     fontSize: !isMobile ? '18px' : '16px',
                     fontWeight: '700',
                   }}
-                  href="#"
                 >
                   Pedicure & Medicure
-                </a>
+                </Link>
               </li>
-            </Grid>}
-          {isMobile &&
+            </Grid>
+          )}
+          {isMobile && (
             <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
-              <li style={{listStyle: 'none'}}>
-                <a
+              <li style={{ listStyle: 'none' }}>
+                <Link
+                  to="/pedicure"
                   style={{
                     textDecoration: 'none',
                     color: '#000',
                     fontSize: !isMobile ? '18px' : '16px',
                     fontWeight: '700',
                   }}
-                  href="#"
                 >
                   Pedicure
-                </a>
+                </Link>
               </li>
-            </Grid>}
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Grid>

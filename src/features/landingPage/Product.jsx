@@ -18,6 +18,7 @@ const Product = () => {
     const fetchProducts = useCallback(async()=>{
         try {
             const response = await axios.get(getAllProducts)
+            console.log('landing --> ', response)
             if(response.status === 200){
                 const limitedData = response.data.response.data.slice(0, 4);
                 setData(limitedData);
@@ -41,7 +42,7 @@ const Product = () => {
                 <Grid container rowSpacing={!isMobile ? 5 : isMobile ? 3 : 0} columnSpacing={!isMobile ? 5 : isMobile ? 12 : 0}>
                     {data.map((value, index) => (
                         <Grid item lg={3} sm={6} xs={12} xl={3} md={6} key={index}>
-                            <ProductCards productId={value.id} image={Content[index].Image} name={value.name} price={value.price} />
+                            <ProductCards productId={value.id} image={value.image} name={value.name} price={value.price} />
                         </Grid>
                     ))}
                 </Grid>

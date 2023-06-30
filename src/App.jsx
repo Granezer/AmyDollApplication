@@ -10,9 +10,6 @@ import Login from './features/auth/login';
 import Register from './features/auth/register';
 import ProductUpload from './features/admin/productUpload';
 import AdminDashboard from './features/admin/dashboard';
-// import React, { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { setSessionId } from './features/store/sessionAction';
 
 function App() {
   return (
@@ -24,35 +21,24 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const hideTopNavFooter = location.pathname === '/admin/login' || location.pathname === '/admin/register' || location.pathname === '/admin/product-upload' || location.pathname === '/admin/dashbord';
-
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const sessionId = generateSessionId();
-  //   dispatch(setSessionId(sessionId));
-  // }, []);
-
-  // const generateSessionId = () => {
-  //   const timestamp = Date.now().toString(); 
-  //   const randomString = Math.random().toString(36).substr(2);
-  
-  //   return timestamp + randomString;
-  // };
-
-  // console.log('Session id --> ', generateSessionId())
+  const hideTopNavFooter =
+    location.pathname === '/admin/login' ||
+    location.pathname === '/admin/register' ||
+    location.pathname === '/admin/product-upload' ||
+    location.pathname === '/admin/dashboard';
 
   return (
     <div>
       {!hideTopNavFooter && <TopNav />}
       <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/initiate-payment' element={<Payment />} />
-        <Route path='/product' element={<Product />} />
-        <Route path='/single-product' element={<SingleProductCard />} />
-        <Route path='/admin/login' element={<Login />} />
-        <Route path='/admin/register' element={<Register />} />
-        <Route path='/admin/product-upload' element={<ProductUpload />} />
-        <Route path='/admin/dashbord' element={<AdminDashboard />} />
+        <Route path="/admin/login" element={<Login />} />
+        <Route path="/admin/register" element={<Register />} />
+        <Route path="/admin/product-upload" element={<ProductUpload />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/initiate-payment" element={<Payment />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/single-product" element={<SingleProductCard />} />
+        <Route path="/*" element={<LandingPage />} />
       </Routes>
       {!hideTopNavFooter && <Footer />}
     </div>

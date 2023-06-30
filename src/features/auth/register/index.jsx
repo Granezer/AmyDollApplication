@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import './styles/Register.css';
 import {registerUrl} from '../../../api/Api';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 function Register () {
+    const navigate = useNavigate();
   const initialValue = {
     firstName: '',
     lastName: '',
@@ -26,7 +28,12 @@ function Register () {
     e.preventDefault ();
     try {
       const response = await axios.post (registerUrl, value);
-      console.log ('Register response:', response.data);
+      if(response.status === 200){
+        navigate('/admin/dashbord')
+        console.log('successful --> ', response)
+      }else{
+        console.log('Failed to login')
+      }
     } catch (error) {
       console.error ('Register failed:', error);
     }

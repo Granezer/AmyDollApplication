@@ -32,6 +32,7 @@ const AdminDashboard = () => {
           <MenuIcon fontSize={'medium'} htmlColor="#453AEF" />
         </IconButton>
       ) : (
+
         <div className="inner-dasboard">
           <div className="sidebar">
             <div
@@ -53,23 +54,23 @@ const AdminDashboard = () => {
               Orders
             </div> */}
           </div>
-        </div>
+              <div className="content">
+              {selectedOption === 'products' && (
+                <div className="centered-content">
+                  <Product />
+                </div>
+              )}
+              {selectedOption === 'upload' && (
+                <div className="centered-content">
+                  <ProductUpload />
+                </div>
+              )}
+              {/* {selectedOption === 'orders' && (
+                  <div className="centered-content">Orders content goes here</div>
+                )} */}
+            </div>
+            </div>
       )}
-      <div className="content">
-        {selectedOption === 'products' && (
-          <div className="centered-content">
-            <Product />
-          </div>
-        )}
-        {selectedOption === 'upload' && (
-          <div className="centered-content">
-            <ProductUpload />
-          </div>
-        )}
-        {/* {selectedOption === 'orders' && (
-            <div className="centered-content">Orders content goes here</div>
-          )} */}
-      </div>
 
       <Drawer anchor="left" open={isDrawerOpen} onClose={handleDrawerToggle}>
         <div className="sidebar">
