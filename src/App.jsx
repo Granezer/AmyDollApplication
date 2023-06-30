@@ -22,19 +22,19 @@ function App() {
 function AppContent() {
   const location = useLocation();
   const hideTopNavFooter =
-    location.pathname === '/admin/login' ||
-    location.pathname === '/admin/register' ||
-    location.pathname === '/admin/product-upload' ||
-    location.pathname === '/admin/dashboard';
+    location.pathname === '/login' ||
+    location.pathname === '/register' ||
+    location.pathname === '/product-upload' ||
+    location.pathname === '/dashboard';
 
   return (
     <div>
       {!hideTopNavFooter && <TopNav />}
       <Routes>
-        <Route path="/admin/login" element={<Login />} />
-        <Route path="/admin/register" element={<Register />} />
-        <Route path="/admin/product-upload" element={<ProductUpload />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/product-upload" element={<ProductUpload />} />
+        <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/initiate-payment" element={<Payment />} />
         <Route path="/product" element={<Product />} />
         <Route path="/single-product" element={<SingleProductCard />} />
