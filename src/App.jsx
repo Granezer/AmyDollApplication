@@ -2,7 +2,7 @@ import './App.css';
 import Footer from './features/footer/Footer';
 import TopNav from './features/header/TopNav';
 import LandingPage from './features/landingPage';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, } from 'react-router-dom';
 import Payment from './features/payment';
 import Product from './features/products';
 import SingleProductCard from './features/reusables/SingleProductCard';

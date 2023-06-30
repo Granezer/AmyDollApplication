@@ -3,10 +3,8 @@ import { useTheme, useMediaQuery, Grid, Typography } from '@mui/material';
 import { getAllProducts } from '../../api/Api';
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
 
 const Product = () => {
-    const location = useLocation();
     const theme = useTheme()
     const isMobile = useMediaQuery(theme.breakpoints.down('md'))
     // const spacer = location.pathname === 
