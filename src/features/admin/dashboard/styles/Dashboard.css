@@ -1,0 +1,72 @@
+.admin-dashboard {
+  height: 100vh;
+  background-color: #fff;
+}
+
+.inner-dasboard{
+    display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #fff;
+  border-right: 1px solid #ccc;
+}
+
+.sidebar-option {
+  padding: 10px;
+  cursor: pointer;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.sidebar-option.active {
+  background-color: #e79595; 
+  color: #fff;
+  font-size: 18px; 
+  font-weight: 600;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.centered-content {
+  text-align: center;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.admin-name {
+  font-weight: bold;
+  color: #000;
+}
+
+.company-logo {
+  max-width: 50px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+}

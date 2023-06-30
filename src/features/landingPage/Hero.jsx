@@ -8,6 +8,7 @@ const Hero = () => {
   const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
   const isSmScreen = useMediaQuery (theme.breakpoints.between (960, 500));
   const isXSScreen = useMediaQuery (theme.breakpoints.down(500));
+
   return (
     <Grid
       container

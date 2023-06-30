@@ -1,7 +1,12 @@
-const baseUrl = "https://amy-doll-backend.onrender.com/api/v1/amy-doll"
+// const baseUrl = "https://amy-doll-backend.onrender.com/api/v1/amy-doll"
+const baseUrl = "http://localhost:8000/api/v1/amy-doll"
+
+// Auth
+export const loginUrl = `${baseUrl}/auth/login`
+export const registerUrl = `${baseUrl}/auth/register`
 
 // product
-export const createProductUrl = `${baseUrl}/ product/create/`
+export const createProductUrl = `${baseUrl}/product/create`
 export const getAllProducts = `${baseUrl}/product/all`;
 export const getProductUrl = (id) => `${baseUrl}/product/:${id}`;
 export const updateProductUrl = (id) => `${baseUrl}/product/:${id}`;

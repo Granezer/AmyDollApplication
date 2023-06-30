@@ -6,8 +6,15 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { cartItems } from '../header/TopNav'
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
 
 const ProductCards = props => {
+  // const sessionId = useSelector((state) => state.session.sessionId);
+  // console.log('Product Session id --> ', sessionId)
+  const location = useLocation()
+  const hideButton = location.pathname === '/admin/dashbord'
+
   const navigate = useNavigate()
   const theme = useTheme ();
   const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
@@ -44,7 +51,7 @@ const ProductCards = props => {
   };
 
   return (
-    <Grid container sx={{ boxShadow: '0 0 5px rgba(161, 151, 151, 0.3), 0 5px 5px rgba(161, 151, 151, 0.3), 5px 0 5px rgba(161, 151, 151, 0.3), 5px 5px 5px rgba(161, 151, 151, 0.3)', minHeight: { lg: '220px', md: '250px', sm: '300px', xs: '300px', xl: '300px', },  minWidth: { lg: '220px', md: '300px', sm: '250px', xs: '300px', xl: '300px', }}}>
+    <Grid container sx={{ boxShadow: '0 0 5px rgba(161, 151, 151, 0.3), 0 5px 5px rgba(161, 151, 151, 0.3), 5px 0 5px rgba(161, 151, 151, 0.3), 5px 5px 5px rgba(161, 151, 151, 0.3)', minHeight: { lg: '220px', md: '250px', sm: '300px', xs: '300px', xl: '300px', },  minWidth: { lg: '220px', md: '300px', sm: '250px', xs: '300px', xl: '300px', },m: hideButton ? '2px' : ''}}>
       <Grid
         item
         lg={5}
@@ -67,7 +74,9 @@ const ProductCards = props => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: hideButton ? 'center' : 'space-between',
+          textAlign: hideButton ? 'center' : '',
+          alignItems: hideButton ? 'center' : '',
         }}
       >
         <Typography
@@ -90,7 +99,7 @@ const ProductCards = props => {
         >
           &#8358; {props.price}
         </Typography>
-        <Button
+        {!hideButton && (<Button
           sx={{
             backgroundColor: '#e79595 !important',
             color: 'white',
@@ -101,8 +110,8 @@ const ProductCards = props => {
           onClick={handleAddToCart}
         >
           Add to Cart
-        </Button>
-        <Button
+        </Button>)}
+        {!hideButton &&(<Button
           sx={{
             backgroundColor: 'green !important',
             color: 'white',
@@ -113,7 +122,7 @@ const ProductCards = props => {
           onClick={handleBuyNow}
         >
           Buy Now
-        </Button>
+        </Button>)}
       </Grid>
     </Grid>
   );
