@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import './styles/Dashboard.css';
 import ProductUpload from '../productUpload';
 import Product from '../../products';
@@ -22,12 +21,12 @@ const AdminDashboard = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
-  // Access the session ID from Redux store
-  const sessionId = useSelector((state) => state.session.sessionId);
+//   // Access the session ID from Redux store
+//   const sessionId = useSelector((state) => state.session.sessionId);
 
   return (
     <div className="admin-dashboard">
-      <TopNav sessionId={sessionId} />
+      <TopNav />
       {isMobile ? (
         <IconButton onClick={handleDrawerToggle}>
           <MenuIcon fontSize={'medium'} htmlColor="#453AEF" />
