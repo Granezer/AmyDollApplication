@@ -49,7 +49,6 @@ const TopNav = () => {
   
   useEffect(() => {
     fetchCartItems();
-    // cartItems(items)
   }, []);
   
   useEffect(() => {
