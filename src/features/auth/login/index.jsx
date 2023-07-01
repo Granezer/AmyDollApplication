@@ -26,7 +26,7 @@ function Login() {
         if (response.status === 200) {
             if (response.data.token) {
                 navigate('/dashboard');
-                console.log('successful --> ', response);
+                // console.log('successful --> ', response);
             } else {
                 console.log('Failed to login');
             }
@@ -69,7 +69,7 @@ function Login() {
           required
         />
 
-        <input type="submit" className="submit-button" />
+        <button type="submit" className="submit-button">submit</button>
 
         {/* <p className="register-link">
   Don't have an account? <Link to="/register" className='register'>Register</Link>
