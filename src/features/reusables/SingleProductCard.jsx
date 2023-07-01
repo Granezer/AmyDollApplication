@@ -76,7 +76,8 @@ const SingleProductCard = () => {
           <img
             src={image_}
             alt="image_"
-            style={{width: isMobile ? '400px' : '800px'}}
+            style={{width: '100%', 
+            objectFit: 'contain',}}
           />
         </Grid>
         <Grid
@@ -88,12 +89,12 @@ const SingleProductCard = () => {
           md={6}
           sx={{mb: isMobile ? 2 : 0, p: !isMobile ? '20px 0px 20px 0px' : ''}}
         >
-          <Grid container rowSpacing={!isMobile ? 6 : 2}>
+          <Grid container rowSpacing={!isMobile ? 6 : 2} mt={isMobile ? 3 : 0}>
             <Grid item lg={12} xs={12} sm={12} md={12} xl={12}>
               <Typography
                 mb={2}
                 sx={{
-                  color: '#a1385c',
+                  color: '#000',
                   fontWeight: '700',
                   fontSize: isMobile ? '18px' : '22px',
                 }}
@@ -102,9 +103,9 @@ const SingleProductCard = () => {
               </Typography>
               <Typography
                 sx={{
-                  color: 'brown',
+                  color: '#000',
                   fontWeight: '700',
-                  fontSize: isMobile ? '16px' : '20px',
+                  fontSize: isMobile ? '14px' : '20px',
                   pr: !isMobile ? '50px' : '',
                 }}
               >
@@ -132,13 +133,15 @@ const SingleProductCard = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item lg={12} xs={12} sm={12} md={12} xl={12}>
+            <Grid item lg={12} xs={12} sm={12} md={12} xl={12} display={'flex'}>
               <Typography
                 mb={isMobile ? 1 : 1}
                 sx={{
-                  color: '#000',
+                  color: '#cdcdcd',
                   fontWeight: '700',
-                  fontSize: isMobile ? '15px' : '18px',
+                  fontSize: isMobile ? '12px' : '18px',
+                  mr: '10px',
+                  textDecoration: 'line-through',
                 }}
               >
                 Price &#8358; {price}
@@ -148,7 +151,7 @@ const SingleProductCard = () => {
                 sx={{
                   color: '#000',
                   fontWeight: '700',
-                  fontSize: isMobile ? '15px' : '18px',
+                  fontSize: isMobile ? '12px' : '18px',
                 }}
               >
                 Sales Price &#8358; {salesPrice}
@@ -158,8 +161,8 @@ const SingleProductCard = () => {
               <Grid container mb={4}>
                 <Grid
                   item
-                  lg={3}
-                  xl={3}
+                  lg={2}
+                  xl={1.5}
                   sm={3}
                   xs={3}
                   md={5}
@@ -168,9 +171,10 @@ const SingleProductCard = () => {
                     fontWeight: '700',
                     fontSize: isMobile ? '16px' : '16px',
                     display: 'flex',
-                    justifyContent: isMobile ? 'flex-start' : 'center',
-                    alignItems: isMobile ? 'flex-start' : 'center',
+                    justifyContent: 'flex-start',
+                    alignItems: 'flex-start',
                     flexDirection: 'column',
+                    textAlign: 'center',
                   }}
                 >
                   Quality:
@@ -184,7 +188,7 @@ const SingleProductCard = () => {
                   md={2}
                   sx={{
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: 'flex-start',
                     alignItems: 'center',
                     flexDirection: 'column',
                     border: '2px solid grey',
@@ -249,13 +253,16 @@ const SingleProductCard = () => {
               </Grid>
               <Button
                 sx={{
-                  color: 'white',
-                  backgroundColor: '#33b27b !important',
+                  color: '#a4a4a4',
+                  backgroundColor: 'transparent !important',
                   fontSize: !isMobile ? '16px' : '14px',
                   fontWeight: '600',
                   border: 'none',
                   borderRadius: '4px',
                   width: '80%',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  // boxShadow: '0 0 4px 4px #a4a4a4',
                 }}
                 onClick={handleBuyNow}
               >

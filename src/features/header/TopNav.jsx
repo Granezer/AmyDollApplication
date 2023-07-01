@@ -60,20 +60,20 @@ const TopNav = () => {
     <>
       {!isMobile && (
         <Grid container sx={{ backgroundColor: '#e79595', justifyContent: 'center', alignItems: 'center', padding: '10px 0px' }}>
-          <Grid item lg={3} xl={3} sx={{ fontSize: '25px', fontWeight: '700', color: 'black', textAlign: 'start', pl: '50px' }}>
+          <Grid item lg={3} xl={3} md={3} sx={{ fontSize: '25px', fontWeight: '700', color: 'black', textAlign: 'start', pl: '50px' }}>
             <a href='/' style={{ textDecoration: 'none', color: '#000' }}><img src={Logo} alt="Logo" style={{ width: '80px', height: '80px', borderRadius: '8px' }} /></a>
           </Grid>
-          <Grid item lg={6} xl={6} sx={{ backgroundColor: 'white', borderRadius: '8px' }}>
+          <Grid item lg={6} xl={6} md={6} sx={{ backgroundColor: 'white', borderRadius: '8px' }}>
             <Grid container>
-              <Grid item lg={10} xl={10} sx={{ display: 'flex', alignItems: 'center' }}>
+              <Grid item lg={10} xl={10} md={10} sx={{ display: 'flex', alignItems: 'center' }}>
                 <input className={style.FI} style={{ color: '#000', backgroundColor: 'white', padding: '5px 10px', border: 'none', borderBottomLeftRadius: '8px', borderTopLeftRadius: '8px', fontSize: '18px', textAlignLast: 'start' }} type="text" placeholder="Search for products..." value={searchProduct} onChange={handleChange} />
               </Grid>
-              <Grid item lg={2} xl={2} sx={{ color: 'white', backgroundColor: '#cd6444', borderTopRightRadius: '8px', borderBottomRightRadius: '8px', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+              <Grid item lg={2} xl={2} md={2} sx={{ color: 'white', backgroundColor: '#cd6444', borderTopRightRadius: '8px', borderBottomRightRadius: '8px', justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
                 <img className={style.topSCI} src={SearchIcon} alt='SearchIcon' />
               </Grid>
             </Grid>
           </Grid>
-          <Grid item lg={3} xl={3} className={style.topTC}>
+          <Grid item lg={3} xl={3} md={3} className={style.topTC}>
             <Grid container>
               <Grid item lg={11} xl={11} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Typography sx={{ color: '#000', fontSize: '20px', fontWeight: '700' }}>Book Session</Typography>

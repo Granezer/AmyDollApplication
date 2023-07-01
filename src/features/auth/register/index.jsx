@@ -32,7 +32,7 @@ function Register () {
       if(response.status === 200){
         // if (response.data.token) {
           navigate('/dashboard');
-          // console.log('successful --> ', response);
+          console.log('successful --> ', response.data.data.token);
       // }
       // }else{
       //   console.log('Failed to login')
