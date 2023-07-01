@@ -26,7 +26,7 @@ function Login() {
         if (response.status === 200) {
             // if (response.data.token) {
                 navigate('/dashboard');
-                // console.log('successful --> ', response);
+                console.log('successful --> ', response);
             // } else {
             //     console.log('Failed to login');
             // }

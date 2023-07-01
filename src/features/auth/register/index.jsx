@@ -30,12 +30,12 @@ function Register () {
     try {
       const response = await axios.post (registerUrl, value);
       if(response.status === 200){
-        if (response.data.token) {
+        // if (response.data.token) {
           navigate('/dashboard');
           // console.log('successful --> ', response);
-      }
-      }else{
-        console.log('Failed to login')
+      // }
+      // }else{
+      //   console.log('Failed to login')
       }
     } catch (error) {
       console.error ('Register failed:', error);
