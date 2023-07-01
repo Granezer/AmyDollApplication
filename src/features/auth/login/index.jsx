@@ -22,19 +22,22 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        console.log('values --> ', value)
-      const response = await axios.post(loginUrl, value);
-      if(response.status === 200){
-        navigate('/dashboard')
-        console.log('successful --> ', response)
-      }else{
-        console.log('Failed to login')
-      }
-
+        const response = await axios.post(loginUrl, value);
+        if (response.status === 200) {
+            if (response.data.token) {
+                navigate('/dashboard');
+                console.log('successful --> ', response);
+            } else {
+                console.log('Failed to login');
+            }
+        } else {
+            console.log('Failed to login');
+        }
     } catch (error) {
-      console.error('Login failed:', error);
+        console.error('Login failed:', error);
     }
-  };
+};
+
 
   return (
     <div className="container">

@@ -34,9 +34,9 @@ const Product = () => {
         <Grid container sx={{ boxShadow: '5px 2px 5px 2px #a19797', backgroundColor: 'white', p: !isMobile ? '30px' : '10px', textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', }} m={{ lg: 0, xl: 0, md: 0, sm: 0, xs: 0, }}>
             <Typography sx={{ color: '#cd6444 !important', fontSize: !isMobile ? '22px' : '18px', fontWeight: '700', p: !isMobile ? '0px 0px 20px 0px' : '0px 0px 20px 0px', textAlignLast: 'center', width: '100%' }}>See All Product</Typography>
             <Grid item lg={12} sm={12} xs={12} xl={12} md={12}>
-            <Grid container spacing={{xl: 3, lg: 3, md: 3, sm: 5, xs: 2}}>
+            <Grid container spacing={{xl: 3, lg: 3, md: 6, sm: 5, xs: 2}}>
                     {data.map((value, index) => (
-                        <Grid item lg={3} sm={6} xs={12} xl={3} md={4} key={value.id}>
+                        <Grid item lg={3} sm={6} xs={12} xl={3} md={3.5} key={value.id}>
                             <ProductCards productId={value.id} image={value.image} name={value.name} price={value.price} salesPrice={value.salesPrice} description={value.description} />
                         </Grid>
                     ))}

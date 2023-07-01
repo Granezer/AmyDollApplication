@@ -11,6 +11,7 @@ import Register from './features/auth/register';
 import ProductUpload from './features/admin/productUpload';
 import AdminDashboard from './features/admin/dashboard';
 import NotFound from './features/reusables/NotFound';
+// import { connect } from 'react-redux';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function AppContent() {
 
   return (
     <div>
+      {/* {!hideTopNavFooter && <TopNav sessionId={sessionId} />} */}
       {!hideTopNavFooter && <TopNav />}
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -47,4 +49,11 @@ function AppContent() {
   );
 }
 
-export default App;
+// const mapStateToProps = (state) => {
+//   return {
+//     sessionId: state.session.sessionId,
+//   };
+// };
+
+// export default connect(mapStateToProps)(App);
+export default App

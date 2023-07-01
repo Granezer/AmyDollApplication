@@ -56,7 +56,7 @@ const SingleProductCard = () => {
           backgroundColor: '#fff',
           width: isMobile ? '97%' : '95%',
         }}
-        columnSpacing={isMobile ? 5 : 0}
+        columnSpacing={isMobile ? 5 : 2}
       >
         <Grid
           item
@@ -68,23 +68,27 @@ const SingleProductCard = () => {
           sx={{
             p: isMobile ? '0px 5px' : '10px 20px',
             display: 'flex',
-            justifyContent:  isMobile ? 'center' : 'flex-start',
-            alignItems: isMobile ? 'center' : 'flex-start',
+            justifyContent: isMobile ? 'center' : 'center',
+            alignItems: isMobile ? 'center' : 'center',
             flexDirection: 'row',
           }}
         >
-          <img src={image_} alt="image_" style={{ width: isMobile ? '400px' : ''}} />
+          <img
+            src={image_}
+            alt="image_"
+            style={{width: isMobile ? '400px' : '800px'}}
+          />
         </Grid>
         <Grid
           item
-          lg={3}
-          xl={3}
+          lg={6}
+          xl={6}
           sm={6}
           xs={12}
           md={6}
-          sx={{ mb: isMobile ? 2 : 0 }}
+          sx={{mb: isMobile ? 2 : 0, p: !isMobile ? '20px 0px 20px 0px' : ''}}
         >
-          <Grid container rowSpacing={!isMobile ? 6 : 4}>
+          <Grid container rowSpacing={!isMobile ? 6 : 2}>
             <Grid item lg={12} xs={12} sm={12} md={12} xl={12}>
               <Typography
                 mb={2}
@@ -101,14 +105,17 @@ const SingleProductCard = () => {
                   color: 'brown',
                   fontWeight: '700',
                   fontSize: isMobile ? '16px' : '20px',
+                  pr: !isMobile ? '50px' : '',
                 }}
               >
-                {description.length > 200 ? description.slice(0, 200) + '...' : description}
+                {description.length > 200
+                  ? description.slice (0, 200) + '...'
+                  : description}
               </Typography>
               <Box
                 sx={{
                   display: 'flex',
-                  width: isMobile ? '190px' : '60%',
+                  width: isMobile ? '190px' : '40%',
                   justifyContent: 'space-between',
                   alignItems: 'flex-start',
                 }}
@@ -126,26 +133,26 @@ const SingleProductCard = () => {
               </Box>
             </Grid>
             <Grid item lg={12} xs={12} sm={12} md={12} xl={12}>
-            <Typography
-          mb={isMobile ? 1 : 2}
-          sx={{
-            color: '#000',
-            fontWeight: '700',
-            fontSize: isMobile ? '15px' : '18px',
-          }}
-        >
-          Price &#8358; {price}
-        </Typography>
-        <Typography
-          mb={isMobile ? 1 : 2}
-          sx={{
-            color: '#000',
-            fontWeight: '700',
-            fontSize: isMobile ? '15px' : '18px',
-          }}
-        >
-          Sales Price &#8358; {salesPrice}
-        </Typography>
+              <Typography
+                mb={isMobile ? 1 : 1}
+                sx={{
+                  color: '#000',
+                  fontWeight: '700',
+                  fontSize: isMobile ? '15px' : '18px',
+                }}
+              >
+                Price &#8358; {price}
+              </Typography>
+              <Typography
+                mb={isMobile ? 1 : 1}
+                sx={{
+                  color: '#000',
+                  fontWeight: '700',
+                  fontSize: isMobile ? '15px' : '18px',
+                }}
+              >
+                Sales Price &#8358; {salesPrice}
+              </Typography>
             </Grid>
             <Grid item lg={12} xs={12} sm={12} md={12} xl={12}>
               <Grid container mb={4}>
@@ -204,7 +211,7 @@ const SingleProductCard = () => {
                     borderTopStyle: 'solid',
                     borderBottomColor: 'grey',
                     borderBottomWidth: '2px',
-                    borderBottomStyle: 'solid',              
+                    borderBottomStyle: 'solid',
                   }}
                 >
                   {quantity}
@@ -226,11 +233,15 @@ const SingleProductCard = () => {
                 >
                   <Button
                     onClick={handleQuantityIncrement}
-                    sx={{color: '#001', fontSize: '20px', fontWeight: '700', 
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',}}
+                    sx={{
+                      color: '#001',
+                      fontSize: '20px',
+                      fontWeight: '700',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      flexDirection: 'column',
+                    }}
                   >
                     +
                   </Button>

@@ -3,16 +3,21 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import reportWebVitals from './reportWebVitals.js'
-import sessionReducer from './features/store/sessionReducer.js';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+// import sessionReducer from './features/store/sessionReducer.js';
+// import { setSessionId } from './features/store/sessionAction.js'
 
-const store = createStore(sessionReducer);
+// const store = createStore(sessionReducer);
+// const sessionId = uuidv4();
+// store.dispatch(setSessionId(sessionId));
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
+    {/* <Provider store={store}> */}
       <App />
-    </Provider>,
+    {/* </Provider>, */}
   </React.StrictMode>,
 )
 
