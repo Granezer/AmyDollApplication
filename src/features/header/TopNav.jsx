@@ -61,7 +61,7 @@ const TopNav = () => {
       {!isMobile && (
         <Grid container sx={{ backgroundColor: '#e79595', justifyContent: 'center', alignItems: 'center', padding: '10px 0px' }}>
           <Grid item lg={3} xl={3} md={3} sx={{ fontSize: '25px', fontWeight: '700', color: 'black', textAlign: 'start', pl: '50px' }}>
-            <a href='/' style={{ textDecoration: 'none', color: '#000' }}><img src={Logo} alt="Logo" style={{ width: '80px', height: '80px', borderRadius: '8px' }} /></a>
+            <a href='/' style={{ textDecoration: 'none', color: '#000' }}><img src={Logo} alt="Logo" style={{ width: '130px', height: '130px', borderRadius: '8px' }} /></a>
           </Grid>
           <Grid item lg={6} xl={6} md={6} sx={{ backgroundColor: 'white', borderRadius: '8px' }}>
             <Grid container>
@@ -92,7 +92,7 @@ const TopNav = () => {
         <Grid container sx={{ backgroundColor: '#e79595', justifyContent: 'center', alignItems: 'center', padding: '10px 20px' }}>
           <Grid item lg={12} xl={12} xs={12} sm={12} md={12}>
             <Grid container spacing={0.5}>
-              <Grid item sm={6} md={6} xs={4} sx={{ fontSize: '18px', fontWeight: '700', color: '#cd6444', textAlign: 'start' }}><a href='/' style={{ textDecoration: 'none', color: '#cd6444' }}><img src={Logo} alt="Logo" style={{ width: '60px', height: '60px', borderRadius: '8px' }} /></a></Grid>
+              <Grid item sm={6} md={6} xs={4} sx={{ fontSize: '18px', fontWeight: '700', color: '#cd6444', textAlign: 'start' }}><a href='/' style={{ textDecoration: 'none', color: '#cd6444' }}><img src={Logo} alt="Logo" style={{ width: '80px', height: '80px', borderRadius: '8px' }} /></a></Grid>
               <Grid item sm={5} md={5} xs={6} sx={{ textAlignLast: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#cd6444' }}>
                 <Typography sx={{ color: '#000 !important', fontSize: '14px', fontWeight: '900' }}>Book Session</Typography>
               </Grid>

@@ -4,6 +4,7 @@ import TwitterIcon from '../../assets/image/Twitter.svg';
 import style from './styles/Footer.module.css';
 import {useTheme, useMediaQuery, Grid, Typography} from '@mui/material';
 import {Link} from 'react-router-dom';
+import Logo from '../../assets/image/Logo.jpeg';
 
 const Footer = () => {
   const theme = useTheme ();
@@ -27,15 +28,7 @@ const Footer = () => {
             className={style.FCS}
             mb={isMobile ? 4 : 0}
           >
-            <Typography
-              sx={{
-                fontSize: !isMobile ? '44px' : '30px',
-                fontWeight: '700',
-                color: '#000',
-              }}
-            >
-              Amy Doll
-            </Typography>
+          <a href='/' style={{ textDecoration: 'none', color: '#000' }}><img src={Logo} alt="Logo" style={{ width: '130px', height: '130px', borderRadius: '8px' }} /></a>
             <Typography
               sx={{
                 fontSize: !isMobile ? '25px' : '17px',
