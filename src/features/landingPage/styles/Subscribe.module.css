@@ -5,6 +5,7 @@
 }
 .SCFI:focus{
     outline: none;
+    border: none;
 }
 .SCFI::placeholder{
     font-size: 18px;

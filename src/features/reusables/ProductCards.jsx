@@ -14,12 +14,9 @@ import {useNavigate} from 'react-router-dom';
 import {cartItems} from '../header/TopNav';
 import {useState} from 'react';
 import {useLocation} from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-import Content from './Content';
 
 const ProductCards = props => {
-  // const sessionId = useSelector((state) => state.session.sessionId);
-  // console.log('Product Session id --> ', sessionId)
+  const sessionId = localStorage.getItem('sessionId');
   const location = useLocation ();
   const hideButton = location.pathname === '/admin/dashbord';
 
@@ -33,21 +30,26 @@ const ProductCards = props => {
       console.error ('Product ID is missing.');
       return;
     }
+    const cartId = localStorage.getItem('cartId')
+    const dataValue = {
+      productId: props.productId,
+      sessionId: sessionId,
+      cartId: cartId,
+    }
 
     try {
-      const response = await axios.post (addToCartUrl, {
-        productId: props.productId,
-      });
-      console.log ('Item added to cart:', response.data);
-      const cartItemsResponse = await axios.get (getAllCartItemsUrl);
+      const sessionId = localStorage.getItem('sessionId');
+      const cartId = localStorage.getItem("cartId");
+      await axios.post (addToCartUrl, dataValue);
+      const cartItemsResponse = await axios.get(getAllCartItemsUrl(sessionId, cartId));
 
       if (cartItemsResponse.status === 200) {
-        setItems (cartItemsResponse.data.response.data);
+        setItems(cartItemsResponse.data.response.data);
       } else {
-        throw new Error (cartItemsResponse.message);
+        alert (cartItemsResponse.message);
       }
     } catch (error) {
-      console.error ('Failed to add item to cart:', error);
+      alert ('Failed to add item to cart:', error);
     }
   };
 
@@ -105,7 +107,7 @@ const ProductCards = props => {
       >
         <img
           src={props.image}
-          alt="Product Image"
+          alt="ProductImage"
           style={{
             width: '100%',
             height: '300px',
@@ -189,33 +191,22 @@ const ProductCards = props => {
             Sales Price &#8358; {props.salesPrice}
           </Typography>
         </Box>
-        {/* {!hideButton && (<Button
+        <Box sx={{ display: 'flex', p: '10px', justifyContent: 'space-between' }}>
+        {!hideButton && (<Button
           sx={{
-            backgroundColor: '#e79595 !important',
-            color: 'white',
+            backgroundColor: 'transparent !important',
+            color: '#a4a4a4',
             fontWeight: '550',
-            fontSize: '12px',
-            mb: '10px',
+            fontSize: '14px',
+            padding: '10px 2px',
+            display: 'flex',
+            justifyContent: 'flex-start',
           }}
           onClick={handleAddToCart}
         >
           Add to Cart
-        </Button>)} */}
-        {!hideButton &&
-          <Button
-            sx={{
-              backgroundColor: 'transparent !important',
-              color: '#a4a4a4',
-              fontWeight: '550',
-              fontSize: '14px',
-              padding: '10px 2px',
-              display: 'flex',
-              justifyContent: 'flex-start',
-            }}
-            onClick={handleBuyNow}
-          >
-            Buy Now
-          </Button>}
+        </Button>)}
+          </Box>
       </Grid>
     </Grid>
   );

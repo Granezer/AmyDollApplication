@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import './styles/ProductUpload.css';
-import { TextField } from '@mui/material';
-import { createProductUrl } from '../../../api/Api';
+import {TextField, Button} from '@mui/material';
+import {createProductUrl} from '../../../api/Api';
 import axios from 'axios';
 
 const ProductUpload = () => {
@@ -12,45 +12,57 @@ const ProductUpload = () => {
     description: '',
     image: null,
   };
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState (initialValue);
 
-  const handleImageChange = (event) => {
+  const handleImageChange = event => {
     const file = event.target.files[0];
-    setValue((prevState) => ({
+    setValue (prevState => ({
       ...prevState,
       image: file,
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault ();
     try {
-      const formData = new FormData();
-      formData.append('name', value.name);
-      formData.append('price', value.price);
-      formData.append('salesPrice', value.salesPrice);
-      formData.append('description', value.description);
+      const formData = new FormData ();
+      formData.append ('name', value.name);
+      formData.append ('price', value.price);
+      formData.append ('salesPrice', value.salesPrice);
+      formData.append ('description', value.description);
       if (value.image) {
-        formData.append('image', value.image);
+        formData.append ('image', value.image);
       } else {
-        throw new Error('No image selected');
+        alert ('No image selected');
       }
 
-      const response = await axios.post(createProductUrl, formData);
+      const response = await axios.post (createProductUrl, formData);
       if (response.status === 200) {
-        console.log('Product upload response:', response);
-        setValue(initialValue)
+        setValue (initialValue);
       } else {
-        console.error('Product upload failed');
+        alert('Product upload failed');
       }
     } catch (error) {
-      console.error('Product upload failed:', error);
-      throw new Error('Product upload failed:', error);
+      alert ('Product upload failed:', error);
     }
   };
 
-  const handleChange = (e) => {
-    setValue((prevState) => ({
+  const handleSelectImage = () => {
+    return (
+      <div>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
+      </div>
+    );
+  };
+
+  const handleChange = e => {
+    setValue (prevState => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
@@ -121,9 +133,16 @@ const ProductUpload = () => {
               />
             </label>
           </div>
-          <button className="uploadSubmit" type="submit">
+          <div className="form-group">
+            <label htmlFor="image">
+            </label>
+            <Button onClick={handleSelectImage} sx={{ color: 'transparent', height: '2px !important' }}>
+              {value.image ? 'Image Selected' : 'Select Image'}
+            </Button>
+          </div>
+          <Button className="uploadSubmit" type="submit">
             Upload
-          </button>
+          </Button>
         </form>
       </div>
     </div>

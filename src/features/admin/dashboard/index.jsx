@@ -6,6 +6,7 @@ import TopNav from '../../header/TopNav';
 import Footer from '../../footer/Footer';
 import { Drawer, IconButton, useTheme, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import Orders from '../Orders';
 
 const AdminDashboard = () => {
   const [selectedOption, setSelectedOption] = useState('products');
@@ -27,77 +28,6 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
       <TopNav />
-      {/* {isMobile ? (
-        <IconButton onClick={handleDrawerToggle}>
-          <MenuIcon fontSize={'medium'} htmlColor="#453AEF" />
-        </IconButton>
-      ) : (
-        <div className="inner-dasboard">
-          <div className="sidebar">
-            <div
-              className={`sidebar-option ${selectedOption === 'products' ? 'active' : ''}`}
-              onClick={() => handleOptionClick('products')}
-            >
-              Products
-            </div>
-            <div
-              className={`sidebar-option ${selectedOption === 'upload' ? 'active' : ''}`}
-              onClick={() => handleOptionClick('upload')}
-            >
-              Upload Product
-            </div>
-          </div>
-          <div className="content">
-            {selectedOption === 'products' && (
-              <div className="centered-content">
-                <Product />
-              </div>
-            )}
-            {selectedOption === 'upload' && (
-              <div className="centered-content">
-                <ProductUpload />
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-      {isMobile && (
-                  <div className="content">
-                  {selectedOption === 'products' && (
-                    <div className="centered-content">
-                      <Product />
-                    </div>
-                  )}
-                  {selectedOption === 'upload' && (
-                    <div className="centered-content">
-                      <ProductUpload />
-                    </div>
-                  )}
-                </div>
-      )}
-
-      <Drawer anchor="left" open={isDrawerOpen} onClose={handleDrawerToggle}>
-        <div className="sidebar">
-          <div
-            className={`sidebar-option ${selectedOption === 'products' ? 'active' : ''}`}
-            onClick={() => {
-              handleOptionClick('products');
-              handleDrawerToggle();
-            }}
-          >
-            Products
-          </div>
-          <div
-            className={`sidebar-option ${selectedOption === 'upload' ? 'active' : ''}`}
-            onClick={() => {
-              handleOptionClick('upload');
-              handleDrawerToggle();
-            }}
-          >
-            Upload Product
-          </div>
-        </div>
-      </Drawer> */}
      <div className="inner-dashboard" style={{ display: isMobile ? '' : 'flex' }}>
      {isMobile && (
         <IconButton onClick={handleDrawerToggle}>
@@ -125,7 +55,7 @@ const AdminDashboard = () => {
               >
                 Upload Product
               </div>
-              {/* <div
+              <div
                 className={`sidebar-option ${selectedOption === 'orders' ? 'active' : ''}`}
                 onClick={() => {
                   handleOptionClick('orders');
@@ -133,7 +63,7 @@ const AdminDashboard = () => {
                 }}
               >
                 Orders
-              </div> */}
+              </div>
             </div>
           </Drawer>
         )}
@@ -152,12 +82,12 @@ const AdminDashboard = () => {
             >
               Upload Product
             </div>
-            {/* <div
+            <div
               className={`sidebar-option ${selectedOption === 'orders' ? 'active' : ''}`}
               onClick={() => handleOptionClick('orders')}
             >
               Orders
-            </div> */}
+            </div>
           </div>
         )}
 
@@ -172,9 +102,11 @@ const AdminDashboard = () => {
               <ProductUpload />
             </div>
           )}
-          {/* {selectedOption === 'orders' && (
-            <div className="centered-content">Orders content goes here</div>
-          )} */}
+          {selectedOption === 'orders' && (
+            <div className="centered-content">
+              <Orders />
+            </div>
+          )}
         </div>
       </div>
       <Footer />

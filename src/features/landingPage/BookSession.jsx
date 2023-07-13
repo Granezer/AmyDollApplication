@@ -1,36 +1,41 @@
 import {useTheme, useMediaQuery, Grid, Button} from '@mui/material';
-import {createSessionUrl} from '../../api/Api';
+import { createSessionUrl } from '../../api/Api';
 import {useState} from 'react';
 import axios from 'axios';
 
 const BookSession = () => {
   const theme = useTheme ();
   const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
-  let initialValue = {
+  
+  const [data, setData] = useState({
     clientName: '',
     phoneNumber: '',
-    date: '',
-    time: '',
+    appointmentDate: '',
+    appointmentTime: '',
     category: '',
-  };
-  const [data, setData] = useState (initialValue);
+  });
 
   const handleChange = (e) => {
-    setData(prevData => ({
+    setData((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault ();
+    e.preventDefault();
+    const formattedData = {
+      ...data,
+    appointmentDate: data.appointmentDate.toString(),
+    appointmentTime: data.appointmentTime.toString(),
+    };
+    console.log('formattedData:', formattedData);
     axios
-      .post (createSessionUrl, data)
-      .then (response => {
-        console.log (response); 
+      .post(createSessionUrl, formattedData)
+      .then(response => {
       })
-      .catch (error => {
-        console.error (error);
+      .catch(error => {
+        console.error(error);
       });
   };
 
@@ -131,10 +136,10 @@ const BookSession = () => {
                   fontWeight: '550',
                 }}
                 type="date"
-                name="date"
-                id="date"
-                placeholder="Date"
-                value={data.date}
+                name="appointmentDate"
+                id="appointmentDate"
+                placeholder="Appointment Date"
+                value={data.appointmentDate}
                 onChange={handleChange}
               />
             </Grid>
@@ -152,10 +157,10 @@ const BookSession = () => {
                   fontWeight: '550',
                 }}
                 type="time"
-                name="time"
-                id="time"
-                placeholder="Time"
-                value={data.time}
+                name="appointmentTime"
+                id="appointmentTime"
+                placeholder="Appointment Time"
+                value={data.appointmentTime}
                 onChange={handleChange}
               />
             </Grid>

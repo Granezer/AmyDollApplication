@@ -25,22 +25,26 @@ function Register () {
     }));
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault ();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post (registerUrl, value);
-      if(response.status === 200){
-        // if (response.data.token) {
+      const response = await axios.post(registerUrl, value);
+  
+      if (response.status === 200) {
+        const token = response.data.data;
+        if (token) {
           navigate('/dashboard');
-          console.log('successful --> ', response.data.data.token);
-      // }
-      // }else{
-      //   console.log('Failed to login')
+        } else {
+          alert('Invalid Credentials');
+        }
+      } else {
+        alert('Failed to register');
       }
     } catch (error) {
-      console.error ('Register failed:', error);
+      alert('Register failed:', error);
     }
   };
+  
 
   return (
     <div className="container">

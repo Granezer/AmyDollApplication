@@ -1,43 +1,42 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './styles/Login.css';
-import { loginUrl } from '../../../api/Api';
+import {loginUrl} from '../../../api/Api';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
+import {Button} from '@mui/material';
 
-function Login() {
-    const navigate = useNavigate();
-  const [value, setValue] = useState({
+function Login () {
+  const navigate = useNavigate ();
+  const [value, setValue] = useState ({
     userName: '',
     password: '',
   });
 
-  const handleChange = (e) => {
-    setValue((prevState) => ({
+  const handleChange = e => {
+    setValue (prevState => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault ();
     try {
-        const response = await axios.post(loginUrl, value);
-        if (response.status === 200) {
-            // if (response.data.token) {
-                navigate('/dashboard');
-                console.log('successful --> ', response.data);
-            // } else {
-            //     console.log('Failed to login');
-            // }
+      const response = await axios.post (loginUrl, value);
+      if (response.status === 200) {
+        const token = response.data.data;
+        if (token) {
+          navigate('/dashboard');
         } else {
-            console.log('Failed to login');
+          alert('Invalid Admin Credentials');
         }
+      } else {
+        alert('Failed to login');
+      }
     } catch (error) {
-        console.error('Login failed:', error);
+      alert('Login failed:', error);
     }
-};
-
+  };
 
   return (
     <div className="container">
@@ -69,11 +68,7 @@ function Login() {
           required
         />
 
-        <button type="submit" className="submit-button">submit</button>
-
-        {/* <p className="register-link">
-  Don't have an account? <Link to="/register" className='register'>Register</Link>
-</p> */}
+        <Button type="submit" className="submit-button">submit</Button>
       </form>
     </div>
   );

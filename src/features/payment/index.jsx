@@ -2,60 +2,114 @@ import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import './styles/Payment.css';
 import { useLocation } from 'react-router-dom';
-import { initiatePaymentUrl, getPaymentVerificationUrl } from '../../api/Api'
+import { initiatePaymentUrl, getPaymentVerificationUrl, createOrderUrl, deleteAllCartItemsUrl } from '../../api/Api';
+import Modal from '../reusables/Modal';
+import ModalVerify from '../reusables/ModalVerify';
+import { Button } from '@mui/material';
 
 const Payment = () => {
-    const [email, setEmail] = useState('');
-    // const [reference, setReference] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
     const [data, setData] = useState()
     const location = useLocation();
-    const { amount } = location.state;
+    const [showModal, setShowModal] = useState(false);
+    const [showVerifyModal, setShowVerifyModal] = useState(false);
+    const [showUnVerifyModal, setShowUnVerifyModal] = useState(false);
+    const { amount, firstName, lastName, country, streetAddress, town, state, phoneNumber, email, orderNote, items } = location.state;
+    let message =''
+
+    const createOrder = async () => {
+      const sessionId = localStorage.getItem('sessionId');
+      const cartId = localStorage.getItem('cartId');
+
+      const orderData = {
+        cartId: cartId,
+        sessionId: sessionId,
+        customerName: firstName + ' ' + lastName,
+        totalAmount: amount,
+        country: country,
+        streetAddress: streetAddress,
+        town: town,
+        state: state,
+        phoneNumber: phoneNumber,
+        email: email,
+        orderNote: orderNote,
+        items: items,
+      };
+
+      try {
+        const url = createOrderUrl(sessionId, cartId);
+        const response = await axios.post(url, orderData);
+        if(response.status === 200){
+        }
+
+      } catch (error) {
+        alert('An error occurred while creating order: ', error)
+      }
+    }
+
+    const deleteAllCartItems = useCallback(async()=>{
+      const sessionId = localStorage.getItem('sessionId');
+      const cartId = localStorage.getItem('cartId');
+
+      try {
+        const url = deleteAllCartItemsUrl(sessionId, cartId)
+        const response = await axios.delete(url);
+        if(response.status === 200){}
+      } catch (error) {
+        
+      }
+    },[])
+
+    const handlePaymentVerify = useCallback(async (reference) => {
+      try {
+        const url = getPaymentVerificationUrl(reference);
+        const response = await axios.get(url);
+        if (response.status === 200) {
+          const responseData = response.data.response;
+          if (responseData.message === 'Successful' && responseData.data.status === 'success') {
+            createOrder();
+            setShowModal(false);
+            await deleteAllCartItems();
+            message = 
+            setShowVerifyModal(true);
+          } else {
+            setShowUnVerifyModal(true)
+            alert('Payment failed');
+          }
+        } else {
+          setShowUnVerifyModal(true)
+        }
+      } catch (error) {
+        alert('An error occurred while verifying payment:', error);
+      }
+    }, []);
+
 
     const handlePayment = useCallback(async () => {
       try {
         const response = await axios.post(initiatePaymentUrl, { email, amount });
         setData(response.data.response);
-        console.log("payment response --> ", response)
         const { authorization_url, reference } = response.data.response;
-    
+
         const newWindow = window.open(authorization_url, '_blank');
-    
+
+        if (response.status === 200) {
+          setShowModal(true);
+        } 
+  
         const intervalId = setInterval(async () => {
-          if (newWindow.closed) {
+          if (newWindow && newWindow.closed) {
             clearInterval(intervalId);
             await handlePaymentVerify(reference);
           }
         }, 1000);
       } catch (error) {
-        console.error('Failed to initialize payment:', error);
+        alert('Failed to initialize payment:', error);
       }
-    }, [email, amount]);
+    }, [email, amount, handlePaymentVerify]);  
 
     useEffect(() => {
       handlePayment();
     }, [handlePayment]);
-
-    useEffect(() => {
-      console.log('Payment initialized:', data);
-    }, [data]);
-
-    const handlePaymentVerify = async (reference) => {
-      try {
-        const url = getPaymentVerificationUrl(reference)
-        const response = await axios.get(url);
-        if(response.status === 200){
-          console.log('Payment verification successful !!!');
-        }else{
-          console.log('Payment failed')
-        }
-      } catch (error) {
-        console.log('An error occurred while verifying payment:', error);
-      }
-    };
-
-    // const isFormValid = amount.trim() !== '' && email.trim() !== '';
 
     return (
       <div className="container">
@@ -66,7 +120,7 @@ const Payment = () => {
             type="text"
             className="input"
             value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            readOnly
           />
         </div>
         <div className="form-group">
@@ -75,7 +129,7 @@ const Payment = () => {
             type="text"
             className="input"
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            readOnly
           />
         </div>
         <div className="form-group">
@@ -84,7 +138,7 @@ const Payment = () => {
             type="email"
             className="input"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            readOnly
           />
         </div>
         <div className="form-group">
@@ -96,20 +150,15 @@ const Payment = () => {
             disabled
           />
         </div>
-        <button
+        <Button
           className="btn"
           onClick={handlePayment}
         >
           Initialize Payment
-        </button>
-        {/* {reference && (
-          <div className="payment-result">
-            <h2 className="subtitle">Payment Reference: {reference}</h2>
-            <button className="btn" onClick={handlePaymentVerify}>
-              Verify Payment
-            </button>
-          </div>
-        )} */}
+        </Button>
+        {showModal && <Modal />}
+        {showVerifyModal && <ModalVerify message={'Payment Successfully Verified'} buttonMessage={'Buy Another Product'} />}
+        {showUnVerifyModal && <ModalVerify message={'Payment verification failed'} buttonMessage={'Try Again'} />}
       </div> 
   )
 }

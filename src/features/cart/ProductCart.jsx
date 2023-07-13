@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '@mui/material';
 
 const ProductCart = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -38,11 +39,11 @@ const ProductCart = () => {
                 <div key={item.id} className="cart-item">
                   <div>{item.name}</div>
                   <div>${item.price}</div>
-                  <button onClick={() => removeFromCart(item)}>Remove</button>
+                  <Button onClick={() => removeFromCart(item)}>Remove</Button>
                 </div>
               ))}
               <div>Total: ${calculateTotal()}</div>
-              <button className="checkout-button">Checkout</button>
+              <Button className="checkout-Button">Checkout</Button>
             </div>
           ) : (
             <div>No items in the cart.</div>

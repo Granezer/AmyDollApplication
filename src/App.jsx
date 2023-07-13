@@ -11,7 +11,9 @@ import Register from './features/auth/register';
 import ProductUpload from './features/admin/productUpload';
 import AdminDashboard from './features/admin/dashboard';
 import NotFound from './features/reusables/NotFound';
-// import { connect } from 'react-redux';
+import Checkout from './features/cart/Checkout';
+import Billing from './features/cart/Billing';
+import Loader from './features/reusables/Loader';
 
 function App() {
   return (
@@ -24,23 +26,26 @@ function App() {
 function AppContent() {
   const location = useLocation();
   const hideTopNavFooter =
-    location.pathname === '/login' ||
-    location.pathname === '/register' ||
-    location.pathname === '/product-upload' ||
-    location.pathname === '/dashboard';
+    location.pathname === '/admin/login' ||
+    location.pathname === '/admin/register' ||
+    location.pathname === '/admin/product-upload' ||
+    location.pathname === '/admin/dashboard';
 
   return (
     <div>
       {/* {!hideTopNavFooter && <TopNav sessionId={sessionId} />} */}
       {!hideTopNavFooter && <TopNav />}
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/product-upload" element={<ProductUpload />} />
-        <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/login" element={<Login />} />
+        <Route path="/admin/register" element={<Register />} />
+        <Route path="/admin/product-upload" element={<ProductUpload />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/initiate-payment" element={<Payment />} />
         <Route path="/product" element={<Product />} />
         <Route path="/single-product" element={<SingleProductCard />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/billing" element={<Billing />} />
+        <Route path='/isloading' element={<Loader />} />
         <Route path="/*" element={<LandingPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
@@ -48,12 +53,4 @@ function AppContent() {
     </div>
   );
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     sessionId: state.session.sessionId,
-//   };
-// };
-
-// export default connect(mapStateToProps)(App);
 export default App

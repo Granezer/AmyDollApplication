@@ -5,35 +5,35 @@ import {
   Button,
   Box,
   Typography,
-} from '@mui/material';
-import {useLocation} from 'react-router-dom';
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import Star from '../../assets/image/Star.svg';
+} from '@mui/material'
+import { useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Star from '../../assets/image/Star.svg'
 
 const SingleProductCard = () => {
-  const navigate = useNavigate ();
-  const [quantity, setQuantity] = useState (1);
-  const theme = useTheme ();
-  const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
-  const location = useLocation ();
-  const {image_, description, price, salesPrice, name} = location.state;
+  const navigate = useNavigate()
+  const [quantity, setQuantity] = useState(1)
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const location = useLocation()
+  const { image_, description, price, salesPrice, name } = location.state
 
   const handleQuantityIncrement = () => {
-    setQuantity (prevState => prevState + 1);
-  };
+    setQuantity((prevState) => prevState + 1)
+  }
 
   const handleQuantityDecrement = () => {
     if (quantity === 0) {
-      setQuantity (1);
+      setQuantity(1)
     } else {
-      setQuantity (prevState => prevState - 1);
+      setQuantity((prevState) => prevState - 1)
     }
-  };
+  }
 
   const handleBuyNow = () => {
-    navigate ('/initiate-payment', {state: {amount: salesPrice * quantity}});
-  };
+    navigate('/billing', { state: { amount: salesPrice * quantity } })
+  }
 
   return (
     <Box
@@ -75,9 +75,8 @@ const SingleProductCard = () => {
         >
           <img
             src={image_}
-            alt="image_"
-            style={{width: '100%', 
-            objectFit: 'contain',}}
+            alt='image_'
+            style={{ width: '100%', objectFit: 'contain' }}
           />
         </Grid>
         <Grid
@@ -87,7 +86,7 @@ const SingleProductCard = () => {
           sm={6}
           xs={12}
           md={6}
-          sx={{mb: isMobile ? 2 : 0, p: !isMobile ? '20px 0px 20px 0px' : ''}}
+          sx={{ mb: isMobile ? 2 : 0, p: !isMobile ? '20px 0px 20px 0px' : '' }}
         >
           <Grid container rowSpacing={!isMobile ? 6 : 2} mt={isMobile ? 3 : 0}>
             <Grid item lg={12} xs={12} sm={12} md={12} xl={12}>
@@ -109,8 +108,8 @@ const SingleProductCard = () => {
                   pr: !isMobile ? '50px' : '',
                 }}
               >
-                {description.length > 200
-                  ? description.slice (0, 200) + '...'
+                {description && description.length > 200
+                  ? description.slice(0, 200) + '...'
                   : description}
               </Typography>
               <Box
@@ -121,13 +120,13 @@ const SingleProductCard = () => {
                   alignItems: 'flex-start',
                 }}
               >
-                <img src={Star} alt="Star" />
-                <img src={Star} alt="Star" />
-                <img src={Star} alt="Star" />
-                <img src={Star} alt="Star" />
-                <img src={Star} alt="Star" />
+                <img src={Star} alt='Star' />
+                <img src={Star} alt='Star' />
+                <img src={Star} alt='Star' />
+                <img src={Star} alt='Star' />
+                <img src={Star} alt='Star' />
                 <Typography
-                  sx={{color: 'grey', fontSize: '14px', fontWeight: '500'}}
+                  sx={{ color: 'grey', fontSize: '14px', fontWeight: '500' }}
                 >
                   89 Review
                 </Typography>
@@ -262,7 +261,6 @@ const SingleProductCard = () => {
                   width: '80%',
                   display: 'flex',
                   justifyContent: 'flex-start',
-                  // boxShadow: '0 0 4px 4px #a4a4a4',
                 }}
                 onClick={handleBuyNow}
               >
@@ -273,14 +271,7 @@ const SingleProductCard = () => {
         </Grid>
       </Grid>
     </Box>
-  );
-};
+  )
+}
 
-// SingleProductCard.propTypes = {
-//   image: PropTypes.object,
-//   description: PropTypes.string,
-//   price: PropTypes.number,
-//   name: PropTypes.string,
-// }
-
-export default SingleProductCard;
+export default SingleProductCard

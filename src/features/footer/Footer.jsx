@@ -103,7 +103,7 @@ const Footer = () => {
             </li>
             <li style={{listStyle: 'none'}}>
               <Link
-                to="/login"
+                to="/admin/login"
                 style={{
                   textDecoration: 'none',
                   color: '#000',

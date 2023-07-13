@@ -1,26 +1,88 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect, useState } from 'react';
 import style from './styles/Hero.module.css';
 import { useTheme, useMediaQuery, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import BgLarge from '../../assets/image/BgLarge.jpeg';
 import BgMid from '../../assets/image/BgMd.jpeg';
+import { createCartUrl, getCartBySessionIdUrl } from '../../api/Api';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const Hero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isSmScreen = useMediaQuery(theme.breakpoints.between(960, 500));
   const isXSScreen = useMediaQuery(theme.breakpoints.down(500));
+  const [index, setIndex] = useState(0)
+
+  const Contents = [
+    {
+      imageUrl: BgLarge,
+      alth: 'ImageOne',
+    },{
+      imageUrl: BgMid,
+      alth: 'ImageTwo',
+    }
+  ]
+
+  const createCart = useCallback(async()=>{
+    const sessionId = { sessionId: localStorage.getItem('sessionId') };
+    await axios.post(createCartUrl(sessionId.sessionId), sessionId)
+    .then((res) => {
+      localStorage.setItem("cartId", res.data.response.data._id)
+      localStorage.getItem('cartId');
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }, [])
+
+  const fetchCartBySessionIdUrl = useCallback(async()=>{
+    const sessionId = localStorage.getItem('sessionId')
+    const response = await axios.get(getCartBySessionIdUrl(sessionId))
+    .then((res)=>{
+      return res.data
+    })
+    .catch((error) => {
+      alert(error)
+    })
+    return response;
+  },[])
+  
+  useEffect(() => {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+      sessionId = uuidv4();
+      localStorage.setItem('sessionId', sessionId);
+      createCart(sessionId)
+        .then((res) => {
+          if (res.message === 'Empty cart created successfully') {
+            // alert('Cart created successfully');
+          } else {
+          }
+        })
+        .catch((error) => {
+          alert('Error creating cart:', error);
+        });
+    } 
+  }, [fetchCartBySessionIdUrl, createCart]);
+  
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIndex((index + 1) % Contents.length)
+    }, 10000)
+    return () => clearInterval(intervalId)
+  }, [index])
 
   return (
     <Grid
       container
       className={style.heroContain}
       sx={{
-        backgroundImage: !isMobile ? `url(${BgLarge})` : `url(${BgMid})`,
+        backgroundImage: !isMobile ? `url(${Contents[index].imageUrl})` : `url(${Contents[index].imageUrl})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: isSmScreen ? 'cover' : isXSScreen ? 'initial' : 'cover',
-        height: isSmScreen ? '300px' : isXSScreen ? '150px' : '500px',
+        backgroundSize: isSmScreen ? 'cover' : isXSScreen ? 'cover' : 'cover',
+        height: isSmScreen ? '400px' : isXSScreen ? '150px' : '500px',
       }}
     >
       <Grid
