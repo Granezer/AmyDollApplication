@@ -9,28 +9,8 @@ import axios from 'axios'
 import { useNavigate, useLocation } from 'react-router-dom';
 import{ Button } from '@mui/material'
 
-export const cartItems = async (value) => {
+export const cartItems = (value) => {
   return value.length
-}
-
-export const updateQuantity = async (setQuantity) => {
-  try {
-    const sessionId = localStorage.getItem('sessionId')
-    const cartId = localStorage.getItem('cartId')
-    const response = await axios.get(getAllCartItemsUrl(sessionId, cartId))
-    if (response.status === 200) {
-      const items = response.data.response.data
-      let totalQuantity = 0
-      items.forEach((item) => {
-        totalQuantity += item.quantity
-      })
-      setQuantity(totalQuantity)
-    } else {
-      console.error('Failed to fetch cart items:', response.message)
-    }
-  } catch (error) {
-    console.error('Failed to fetch cart items:', error)
-  }
 }
 
 const TopNav = () => {
@@ -41,88 +21,57 @@ const TopNav = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [searchProduct, setSearchProduct] = useState()
   const [items, setItems] = useState([])
-  const [quantity, setQuantity] = useState(0)
-  const [product, setProduct] = useState([])
-  const [filteredProducts, setFilteredProducts] = useState([])
-  const [isLoading, setIsLoading] = useState(true);
+  const [quantity, setQuantity] = useState(cartItems(items))
+  // const [product, setProduct] = useState([])
+  // const [filteredProducts, setFilteredProducts] = useState([])
+  // const [isLoading, setIsLoading] = useState(true);
 
   const handleChange = (e) => {
     setSearchProduct(e.target.value)
   }
 
-  const fetchProducts = useCallback(async () => {
-    try {
-      const response = await axios.get(getAllProducts)
+  // const fetchProducts = useCallback(async () => {
+  //   try {
+  //     const response = await axios.get(getAllProducts)
+  //     if (response.status === 200) {
+  //       const data = response.data.response.data
+  //       if(data.lenght !== 0){
+  //         setProduct(data)
+  //         console.log('prd --> ', data)
+  //         setIsLoading(false)
+  //       }else{
+  //         setIsLoading(true)
+  //       }
+  //     } else {
+  //       alert('Unable to fetch data')
+  //     }
+  //   } catch (error) {
+  //     alert(error)
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   fetchProducts()
+  // }, [fetchProducts])
+
+  useEffect(() => {
+    const updateCartItems = async () => {
+      const sessionId = localStorage.getItem('sessionId');
+      const cartId = localStorage.getItem('cartId');
+      const response = await axios.get(getAllCartItemsUrl(sessionId, cartId));
       if (response.status === 200) {
-        const data = response.data.response.data
-        if(data.lenght !== 0){
-          setProduct(data)
-          setIsLoading(false)
-        }else{
-          setIsLoading(true)
-        }
+        setItems(response.data.response.data);
+        setQuantity(cartItems(response.data.response.data));
+        // setIsLoading(false)
+
       } else {
-        alert('Unable to fetch data')
+        // alert(response.message);
       }
-    } catch (error) {
-      alert(error)
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchProducts()
-  }, [fetchProducts])
-
-  const fetchCartItems = useCallback(async () => {
-    try {
-      const sessionId = localStorage.getItem('sessionId')
-      const cartId = localStorage.getItem('cartId')
-      const response = await axios.get(getAllCartItemsUrl(sessionId, cartId))
-      if (response.status === 200) {
-        setItems(response.data.response.data)
-      } else {
-        alert(response.message)
-      }
-    } catch (error) {
-      alert('Failed to fetch cart items:', error)
-    }
-  }, [])
-
-  const handleQuantity = useCallback(() => {
-    let totalQuantity = 0
-    const itemsArray = items ? Array.from(items) : []
-    itemsArray.forEach((item) => {
-      totalQuantity += item.quantity
-    })
-    setQuantity(totalQuantity)
-  }, [items])
-
-  const startFetchInterval = useCallback(() => {
-    const fetchInterval = setInterval(fetchCartItems, 50000);
-    
-    const hasItemInCart = localStorage.getItem('cartId') !== null;
-    if (hasItemInCart) {
-      fetchCartItems();
-    }
-    
-    return () => {
-      clearInterval(fetchInterval);
     };
-  }, [fetchCartItems]);
 
-  useEffect(() => {
-    const cleanup = startFetchInterval();
-  
-    return () => {
-      cleanup();
-    };
-  }, [startFetchInterval]);
+    updateCartItems();
+  }, []);
 
-  useEffect(() => {
-    updateQuantity(setQuantity)
-    handleQuantity()
-  }, [handleQuantity])
-  
   return (
     <>
       {!isMobile && (
@@ -331,8 +280,8 @@ const TopNav = () => {
                   Book Session
                 </Typography>
               </Grid>
-                {isLoading ? (
-                  <Grid
+                {/* {isLoading ? ( */}
+                  {/* <Grid
                   item
                   sm={1}
                   md={1}
@@ -365,7 +314,7 @@ const TopNav = () => {
                     {quantity === 0}
                   </span>
                 </Grid>
-                ):(
+                ):( */}
                   <Grid
                   item
                   sm={1}
@@ -399,7 +348,7 @@ const TopNav = () => {
                     {quantity}
                   </span>
                 </Grid>
-                )}
+                {/* )} */}
             </Grid>
           </Grid>
           <Grid

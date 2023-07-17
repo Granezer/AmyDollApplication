@@ -1,5 +1,13 @@
 import {useState, useCallback, useEffect} from 'react';
-import {Grid, Box, useMediaQuery, useTheme, Button} from '@mui/material';
+import {
+  Grid,
+  Box,
+  useMediaQuery,
+  Button,
+  Skeleton,
+  Avatar,
+  Typography,
+} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {getAllCartItemsUrl, deleteCartItemUrl} from '../../api/Api';
@@ -25,7 +33,7 @@ const Checkout = () => {
         alert (response.message);
       }
     } catch (error) {
-      alert ('Failed to fetch cart items:', error);
+      // alert ('Failed to fetch cart items:', error);
     }
   }, []);
 
@@ -39,7 +47,7 @@ const Checkout = () => {
         prevItems.filter (item => item.productId !== productId)
       );
     } catch (error) {
-      alert ('Error removing cart item:', error);
+      // alert ('Error removing cart item:', error);
     }
   };
 
@@ -54,9 +62,11 @@ const Checkout = () => {
     () => {
       const calculateTotalPrice = () => {
         let totalPrice = 0;
-        items.forEach (item => {
-          totalPrice += item.salesPrice * item.quantity;
-        });
+        if (items && items.length) {
+          items.forEach (item => {
+            totalPrice += item.salesPrice * item.quantity;
+          });
+        }
         setTotalPrice (totalPrice);
       };
       calculateTotalPrice ();
@@ -64,10 +74,42 @@ const Checkout = () => {
     [items]
   );
 
+  const centerTwoStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    mt: {md: 1},
+    rowGap: {lg: 2, xl: 4, sm: 3, xs: 5, md: 3},
+    columnGap: {lg: 9, xl: 9, sm: 20, xs: 10, md: 15},
+  };
+
   if (isLoading) {
     return (
       <div>
-        <Loader />
+        <Grid container sx={centerTwoStyle}>
+          {Array.from ({length: 2}).map ((_, index) => (
+            <Grid item lg={12} sm={12} xs={12} xl={12} md={12} key={index}>
+              <Box display="flex" p='5px 10px' justifyContent={'space-between'} width='100%' alignItems={'center'}>
+                <Skeleton
+                  animation="wave"
+                  variant="circle"
+                  width={80}
+                  height={40}
+                  sx={{borderRadius: '8px'}}
+                />
+                <Skeleton width="60%">
+                  <Typography>.</Typography>
+                </Skeleton>
+                <Skeleton variant="circle" 
+                  width={80}
+                  height={40}
+                  sx={{borderRadius: '8px'}}>
+                  <Avatar />
+                </Skeleton>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
       </div>
     );
   }
@@ -80,22 +122,26 @@ const Checkout = () => {
       <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
         <h1 style={{color: '#e79595', textAlign: 'center'}}>Checkout</h1>
       </Grid>
-      <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-        <ul>
-          {items.map (item => (
-            <li
-              key={item.productId}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '20px',
-              }}
-            >
-              <CheckoutCard item={item} removeCartItem={handleDelete} />
-            </li>
-          ))}
-        </ul>
-      </Grid>
+      {items === null || items.length === 0
+        ? <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+            <p style={{textAlign: 'center'}}>Your cart is empty.</p>
+          </Grid>
+        : <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+            <ul>
+              {items.map (item => (
+                <li
+                  key={item.productId}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: '20px',
+                  }}
+                >
+                  <CheckoutCard item={item} removeCartItem={handleDelete} />
+                </li>
+              ))}
+            </ul>
+          </Grid>}
       <Grid
         item
         lg={12}

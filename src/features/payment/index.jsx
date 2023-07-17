@@ -42,7 +42,7 @@ const Payment = () => {
         }
 
       } catch (error) {
-        alert('An error occurred while creating order: ', error)
+        // alert('An error occurred while creating order: ', error)
       }
     }
 
@@ -73,13 +73,13 @@ const Payment = () => {
             setShowVerifyModal(true);
           } else {
             setShowUnVerifyModal(true)
-            alert('Payment failed');
+            // alert('Payment failed');
           }
         } else {
           setShowUnVerifyModal(true)
         }
       } catch (error) {
-        alert('An error occurred while verifying payment:', error);
+        // alert('An error occurred while verifying payment:', error);
       }
     }, []);
 
@@ -103,7 +103,7 @@ const Payment = () => {
           }
         }, 1000);
       } catch (error) {
-        alert('Failed to initialize payment:', error);
+        // alert('Failed to initialize payment:', error);
       }
     }, [email, amount, handlePaymentVerify]);  
 

@@ -1,5 +1,5 @@
-const baseUrl = "https://amy-doll-backend.onrender.com/api/v1/amy-doll"
-// const baseUrl = "http://localhost:8000/api/v1/amy-doll"
+// const baseUrl = "https://amy-doll-backend.onrender.com/api/v1/amy-doll"
+const baseUrl = "http://localhost:8000/api/v1/amy-doll"
 
 // Auth
 export const loginUrl = `${baseUrl}/auth/login`

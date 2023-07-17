@@ -1,5 +1,5 @@
 import ProductCards from '../reusables/ProductCards'
-import { useTheme, useMediaQuery, Grid, Typography } from '@mui/material'
+import { useTheme, useMediaQuery, Grid, Typography, Box, Skeleton } from '@mui/material'
 import { getAllProducts } from '../../api/Api'
 import { useState, useCallback, useEffect } from 'react'
 import axios from 'axios'
@@ -18,16 +18,25 @@ const Product = () => {
         setData(response.data.response.data)
         setLoading(false)
       } else {
-        alert('Unable to fetch data')
+        // alert('Unable to fetch data')
       }
     } catch (error) {
-      alert(error)
+      // alert(error)
     }
   }, [])
 
   useEffect(() => {
     fetchProducts()
   }, [fetchProducts])
+
+  const centerTwoStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    mt: { md: 1 },
+    rowGap: { lg: 2, xl: 4, sm: 3, xs: 5, md: 3 },
+    columnGap: { lg: 1, xl: 1, sm: 20, xs: 10, md: 15 },
+  }
 
   return (
     <Grid
@@ -57,7 +66,34 @@ const Product = () => {
         See All Product
       </Typography>
       {loading ? (
-        <Loader />
+          <Grid container
+          sx={centerTwoStyle}
+        >
+          {Array.from({ length: 4 }).map((_, index) => (
+            <Grid item lg={2.5} sm={6} xs={12} xl={2.5} md={3.5} key={index}>
+              <Box>
+                <Skeleton
+                  variant='rectangular'
+                  width=''
+                  height='200px'
+                  sx={{ margin: '20px 0px' }}
+                />
+                <Skeleton
+                  variant='rectangular'
+                  width=''
+                  height='90px'
+                  sx={{ margin: '30px 0px' }}
+                />
+                <Skeleton
+                  variant='rectangular'
+                  width=''
+                  height='50px'
+                  sx={{ margin: '30px 0px' }}
+                />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
       ) : (
         <Grid item lg={12} sm={12} xs={12} xl={12} md={12}>
           <Grid container spacing={{ xl: 3, lg: 3, md: 6, sm: 5, xs: 2 }}>

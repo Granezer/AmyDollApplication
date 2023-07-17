@@ -17,7 +17,7 @@ function Orders() {
         setLoading(false);
       }
     } catch (error) {
-      alert('Failed to fetch orders: ', error);
+      // throw new Error('Failed to fetch orders: ', error);
     }
   }, []);
 

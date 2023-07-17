@@ -43,7 +43,7 @@ const ProductUpload = () => {
         alert('Product upload failed');
       }
     } catch (error) {
-      alert ('Product upload failed:', error);
+      // alert ('Product upload failed:', error);
     }
   };
 

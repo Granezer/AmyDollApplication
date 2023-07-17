@@ -41,7 +41,7 @@ function Register () {
         alert('Failed to register');
       }
     } catch (error) {
-      alert('Register failed:', error);
+      // alert('Register failed:', error);
     }
   };
   

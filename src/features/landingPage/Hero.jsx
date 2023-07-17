@@ -33,7 +33,7 @@ const Hero = () => {
       localStorage.getItem('cartId');
     })
     .catch((error) => {
-      alert(error)
+      // alert(error)
     })
   }, [])
 
@@ -44,7 +44,7 @@ const Hero = () => {
       return res.data
     })
     .catch((error) => {
-      alert(error)
+      // alert(error)
     })
     return response;
   },[])
@@ -62,7 +62,7 @@ const Hero = () => {
           }
         })
         .catch((error) => {
-          alert('Error creating cart:', error);
+          // alert('Error creating cart:', error);
         });
     } 
   }, [fetchCartBySessionIdUrl, createCart]);

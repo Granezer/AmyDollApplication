@@ -34,7 +34,7 @@ function Login () {
         alert('Failed to login');
       }
     } catch (error) {
-      alert('Login failed:', error);
+      // alert('Login failed:', error);
     }
   };
 

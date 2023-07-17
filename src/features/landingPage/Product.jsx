@@ -6,6 +6,7 @@ import {
   Grid,
   Button,
   Typography,
+  Box, Skeleton
 } from '@mui/material'
 import ThreeGirl from '../../assets/image/ThreeGirl.png'
 import { getAllProducts } from '../../api/Api'
@@ -30,16 +31,25 @@ const Product = () => {
         setData(limitedData)
         setLoading(false)
       } else {
-        alert('Unable to fetch data')
+        // alert('Unable to fetch data')
       }
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   }, [])
 
   useEffect(() => {
     fetchProducts()
   }, [fetchProducts])
+
+  const centerTwoStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    mt: { md: 1 },
+    rowGap: { lg: 2, xl: 4, sm: 3, xs: 5, md: 3 },
+    columnGap: { lg: 1, xl: 1, sm: 20, xs: 10, md: 15 },
+  }
 
   return (
     <Grid
@@ -66,7 +76,34 @@ const Product = () => {
         Available Products
       </Grid>
       {loading ? (
-        <Loader />
+        <Grid container
+        sx={centerTwoStyle}
+      >
+        {Array.from({ length: 4 }).map((_, index) => (
+          <Grid item lg={2.5} sm={6} xs={12} xl={2.5} md={6} key={index}>
+            <Box>
+              <Skeleton
+                variant='rectangular'
+                width=''
+                height='200px'
+                sx={{ margin: '20px 0px' }}
+              />
+              <Skeleton
+                variant='rectangular'
+                width=''
+                height='90px'
+                sx={{ margin: '30px 0px' }}
+              />
+              <Skeleton
+                variant='rectangular'
+                width=''
+                height='50px'
+                sx={{ margin: '30px 0px' }}
+              />
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
       ) : (
         <Grid item lg={12} sm={12} xs={12} xl={12} md={12}>
           <Grid

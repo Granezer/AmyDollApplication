@@ -11,7 +11,7 @@ function OrderCard(props) {
     try {
       await axios.put(updateOrdersUrl(props.order._id), data);
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   }, [props.order._id]);
 
@@ -19,7 +19,7 @@ function OrderCard(props) {
     try {
       await axios.delete(deleteOrderByOrderId(props.order._id));
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   }, [props.order._id]);
 

@@ -18,7 +18,7 @@ const Cart = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      alert ('Error fetching cart items:', error);
+      // alert ('Error fetching cart items:', error);
     }
   };
 
@@ -30,7 +30,7 @@ const Cart = () => {
       });
       setItems(response.data.data);
     } catch (error) {
-      alert('Error adding item to cart:', error);
+      // alert('Error adding item to cart:', error);
     }
   };
 
@@ -39,7 +39,7 @@ const Cart = () => {
       const response = await axios.put(updateCartItemUrl(itemId), { quantity: quantity });
       setItems(response.data.data);
     } catch (error) {
-      alert ('Error updating cart item:', error);
+      // alert ('Error updating cart item:', error);
     }
   };
 
@@ -48,7 +48,7 @@ const Cart = () => {
       const response = await axios.delete(deleteCartItemUrl(itemId));
       setItems(response.data.data);
     } catch (error) {
-      alert ('Error removing cart item:', error);
+      // alert ('Error removing cart item:', error);
     }
   };
 
