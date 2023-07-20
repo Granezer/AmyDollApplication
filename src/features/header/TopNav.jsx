@@ -31,8 +31,7 @@ const TopNav = () => {
     }
     return totalQuantity;
   };
-  
-  console.log('Cart quantity --> ', getCartItemCount() > 0)
+
 
   return (
     <>

@@ -24,7 +24,7 @@ const ProductCards = props => {
 
   const sendItemToCart = async () => {
     if (!props.productId) {
-      console.error ('Product ID is missing.');
+      // console.error ('Product ID is missing.');
       return;
     }
     const cartId = localStorage.getItem('cartId')

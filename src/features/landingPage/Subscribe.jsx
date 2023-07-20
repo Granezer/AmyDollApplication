@@ -14,7 +14,7 @@ const Subscribe = () => {
       .then((response) => {
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
       });
   };
 

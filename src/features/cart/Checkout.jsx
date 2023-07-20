@@ -31,10 +31,10 @@ const Checkout = () => {
         setItems (response.data.response.data);
         setCartItems(response.data.response.data);
         setIsLoading (false);
-        if(items.length === 0){
-          setIsCheckout(false)
-        }else{
+        if(items.length !== null){
           setIsCheckout(true)
+        }else{
+          setIsCheckout(false)
         }
       } else {
         // alert (response.message);
@@ -42,7 +42,7 @@ const Checkout = () => {
     } catch (error) {
       // alert ('Failed to fetch cart items:', error);
     }
-  }, [setCartItems, items.length]);
+  }, [setCartItems]);
 
   const handleDelete = async productId => {
     try {

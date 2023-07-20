@@ -29,13 +29,13 @@ const BookSession = () => {
     appointmentDate: data.appointmentDate.toString(),
     appointmentTime: data.appointmentTime.toString(),
     };
-    console.log('formattedData:', formattedData);
+    // console.log('formattedData:', formattedData);
     axios
       .post(createSessionUrl, formattedData)
       .then(response => {
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
       });
   };
 
