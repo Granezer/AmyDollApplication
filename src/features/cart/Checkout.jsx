@@ -19,6 +19,7 @@ const Checkout = () => {
   const [items, setItems] = useState ([]);
   const [totalPrice, setTotalPrice] = useState (0);
   const [isLoading, setIsLoading] = useState (true);
+  const [isCheckout, setIsCheckout] = useState(true);
 
 
   const fetchCartItems = useCallback (async () => {
@@ -30,13 +31,18 @@ const Checkout = () => {
         setItems (response.data.response.data);
         setCartItems(response.data.response.data);
         setIsLoading (false);
+        if(items.length === 0){
+          setIsCheckout(false)
+        }else{
+          setIsCheckout(true)
+        }
       } else {
         // alert (response.message);
       }
     } catch (error) {
       // alert ('Failed to fetch cart items:', error);
     }
-  }, [setCartItems]);
+  }, [setCartItems, items.length]);
 
   const handleDelete = async productId => {
     try {
@@ -233,7 +239,7 @@ const Checkout = () => {
           },
         }}
         onClick={() => {
-          if (items.length > 0) {
+          if (isCheckout === true) {
             navigate('/billing', {
               state: {
                 amount: totalPrice,
@@ -248,7 +254,7 @@ const Checkout = () => {
           }
         }}
       >
-        {items.length > 0 ? 'Checkout' : 'Buy Now'}
+        {isCheckout === true ? 'Checkout' : 'Buy Now'}
       </Button>
     </Grid>
   );
