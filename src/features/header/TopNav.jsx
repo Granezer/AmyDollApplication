@@ -210,7 +210,7 @@ const TopNav = () => {
                   {isLoading ? (
                     <Skeleton variant="circular" width={40} height={40} />
                   ):(
-                  cartItems.length > 0 && (
+                  cartItems.length >= 0 && (
                     <span
                       style={{
                         color: 'black',
@@ -313,18 +313,23 @@ const TopNav = () => {
                   >
                     <img src={CartIcon} alt='CartIcon' />
                   </Button>
-                  <span
-                    style={{
+                 {isLoading ? (
+                    <Skeleton variant="circular" width={40} height={40} />
+                  ):(
+                  cartItems.length >= 0 && (
+                    <span
+                      style={{
                       color: '#000',
                       fontSize: '16px',
                       fontWeight: '700',
                       backgroundColor: 'transparent',
                       marginTop: '-15px',
                       borderRadius: '50%',
-                    }}
-                  >
-                    {quantity === 0}
-                  </span>
+                      }}
+                    >
+                      {getCartItemCount()}
+                    </span>
+                  ))}
                 </Grid>
                 ):( */}
                   <Grid
