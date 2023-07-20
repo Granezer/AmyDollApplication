@@ -6,17 +6,16 @@ import { initiatePaymentUrl, getPaymentVerificationUrl, createOrderUrl, deleteAl
 import Modal from '../reusables/Modal';
 import ModalVerify from '../reusables/ModalVerify';
 import { Button } from '@mui/material';
+import ModalUnVerify from '../reusables/ModalUnVerify';
 
 const Payment = () => {
-    const [data, setData] = useState()
     const location = useLocation();
     const [showModal, setShowModal] = useState(false);
     const [showVerifyModal, setShowVerifyModal] = useState(false);
     const [showUnVerifyModal, setShowUnVerifyModal] = useState(false);
     const { amount, firstName, lastName, country, streetAddress, town, state, phoneNumber, email, orderNote, items } = location.state;
-    let message =''
 
-    const createOrder = async () => {
+    const createOrder = useCallback(async () => {
       const sessionId = localStorage.getItem('sessionId');
       const cartId = localStorage.getItem('cartId');
 
@@ -44,7 +43,7 @@ const Payment = () => {
       } catch (error) {
         // alert('An error occurred while creating order: ', error)
       }
-    }
+    },[amount, country, email, firstName, items, lastName, orderNote, phoneNumber, state, streetAddress, town])
 
     const deleteAllCartItems = useCallback(async()=>{
       const sessionId = localStorage.getItem('sessionId');
@@ -65,11 +64,10 @@ const Payment = () => {
         const response = await axios.get(url);
         if (response.status === 200) {
           const responseData = response.data.response;
-          if (responseData.message === 'Successful' && responseData.data.status === 'success') {
+          if (response.data.response.message === 'Successful' && responseData.data.status === 'success') {
             createOrder();
             setShowModal(false);
             await deleteAllCartItems();
-            message = 
             setShowVerifyModal(true);
           } else {
             setShowUnVerifyModal(true)
@@ -81,13 +79,12 @@ const Payment = () => {
       } catch (error) {
         // alert('An error occurred while verifying payment:', error);
       }
-    }, []);
+    }, [createOrder, deleteAllCartItems]);
 
 
     const handlePayment = useCallback(async () => {
       try {
         const response = await axios.post(initiatePaymentUrl, { email, amount });
-        setData(response.data.response);
         const { authorization_url, reference } = response.data.response;
 
         const newWindow = window.open(authorization_url, '_blank');
@@ -157,8 +154,8 @@ const Payment = () => {
           Initialize Payment
         </Button>
         {showModal && <Modal />}
-        {showVerifyModal && <ModalVerify message={'Payment Successfully Verified'} buttonMessage={'Buy Another Product'} />}
-        {showUnVerifyModal && <ModalVerify message={'Payment verification failed'} buttonMessage={'Try Again'} />}
+        {showVerifyModal && <ModalVerify />}
+        {showUnVerifyModal && <ModalUnVerify />}
       </div> 
   )
 }

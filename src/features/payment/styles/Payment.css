@@ -38,9 +38,10 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    font-weight: 700;
     text-align: center;
-    background-color:rgb(241, 145, 88);
-    color: #fff;
+    background-color:rgb(241, 145, 88) !important;
+    color: #fff !important;
     border: none;
     border-radius: 4px;
     cursor: pointer;

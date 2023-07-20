@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Marker from '../../assets/image/Maker.svg'
 import { Button } from '@mui/material';
 
-const ModalVerify = () => {
+const ModalUnVerify = () => {
   const [isOpen, setIsOpen] = useState(true);
   const router = useNavigate()
   const handleCloseModal = (e) => {
@@ -21,10 +21,10 @@ const ModalVerify = () => {
               <img src={Marker} alt='Marker' />
             </div>
             <div style={TextWrapper}>
-              <p style={{ fontSize: '25px', fontWeight: '700', color: '#000', textAlign: 'center' }}>Payment Successfully Verified</p>
+              <p style={{ fontSize: '25px', fontWeight: '700', color: '#000', textAlign: 'center' }}>Payment verification failed</p>
             </div>
             <Button style={ButtonStyle} onClick={handleCloseModal}>
-              Buy Another Product
+                Try Again
             </Button>
           </div>
         </div>
@@ -33,7 +33,7 @@ const ModalVerify = () => {
   );
 };
 
-export default ModalVerify;
+export default ModalUnVerify;
 
 // Styles
 

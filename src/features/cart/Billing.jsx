@@ -24,21 +24,21 @@ function Billing () {
     const { amount, items, } = location.state
     const [formData, setFormData] = useState(initialValue);
       
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value
-      }));
-    };
+    // const handleChange = (e) => {
+    //   const { name, value } = e.target;
+    //   setFormData((prevFormData) => ({
+    //     ...prevFormData,
+    //     [name]: value
+    //   }));
+    // };
     
-    const handleCheckboxChange = (e) => {
-      const { checked } = e.target;
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        termsChecked: checked
-      }));
-    };
+    // const handleCheckboxChange = (e) => {
+    //   const { checked } = e.target;
+    //   setFormData((prevFormData) => ({
+    //     ...prevFormData,
+    //     termsChecked: checked
+    //   }));
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -161,8 +161,6 @@ function Billing () {
             />
           </div>
 
-
-
           <div className="inputWrapper">
             <label for="" className="label">Order notes (optional)</label>
             <TextField
@@ -229,23 +227,7 @@ function Billing () {
               className="paystack"
             />
           </div>
-
-          <p className="confirmMsg">
-            Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our
-            {' '}
-            <a href="#" className="links">privacy policy.</a>
-          </p>
-
-          <div className="terms">
-            <input type="checkbox" name="" id="termsAndconditions" />
-            <label for="terms/conditions" className="termsLabel">
-              <strong>
-                {' '}
-                I have read and agree to the website
-                <a href="#" className="links"> terms and conditions.</a>
-              </strong>
-            </label>
-          </div>
+          <div style={{ margin: '30px 0px' }}></div>
 
           <Button type="submit" className="submitBtn">Place order</Button>
         </div>

@@ -223,14 +223,8 @@ const Checkout = () => {
           color: '#fff',
           textAlignLast: 'center',
           fontWeight: '600',
-          width: {
-            lg: '120px',
-            xl: '120px',
-            md: '100px',
-            sm: '90px',
-            xs: '80px',
-          },
-          height: {lg: '40px', xl: '40px', md: '40px', sm: '40px', xs: '35px'},
+          width: { lg: '120px', xl: '120px', md: '100px', sm: '90px', xs: '80px' },
+          height: { lg: '40px', xl: '40px', md: '40px', sm: '40px', xs: '35px' },
           borderRadius: '4px',
           justifySelf: 'center',
           margin: '0 auto',
@@ -239,18 +233,22 @@ const Checkout = () => {
           },
         }}
         onClick={() => {
-          navigate ('/billing', {
-            state: {
-              amount: totalPrice,
-              items: items.map (item => ({
-                productId: item.productId,
-                quantity: item.quantity,
-              })),
-            },
-          });
+          if (items.length > 0) {
+            navigate('/billing', {
+              state: {
+                amount: totalPrice,
+                items: items.map((item) => ({
+                  productId: item.productId,
+                  quantity: item.quantity,
+                })),
+              },
+            });
+          } else {
+            navigate('/');
+          }
         }}
       >
-        Chekout
+        {items.length > 0 ? 'Checkout' : 'Buy Now'}
       </Button>
     </Grid>
   );

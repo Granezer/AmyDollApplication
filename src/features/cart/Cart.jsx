@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CartItem from './CartItem';
-import { addToCartUrl, getAllCartItemsUrl, deleteCartItemUrl, updateCartItemUrl } from '../../api/Api';
+import { getAllCartItemsUrl, deleteCartItemUrl, updateCartItemUrl } from '../../api/Api';
 import Loader from '../reusables/Loader';
 
 const Cart = () => {
@@ -22,17 +22,17 @@ const Cart = () => {
     }
   };
 
-  const addToCart = async (productId) => {
-    try {
-      const response = await axios.post(addToCartUrl, {
-        sessionId: sessionId,
-        productId: productId,
-      });
-      setItems(response.data.data);
-    } catch (error) {
-      // alert('Error adding item to cart:', error);
-    }
-  };
+  // const addToCart = async (productId) => {
+  //   try {
+  //     const response = await axios.post(addToCartUrl, {
+  //       sessionId: sessionId,
+  //       productId: productId,
+  //     });
+  //     setItems(response.data.data);
+  //   } catch (error) {
+  //     // alert('Error adding item to cart:', error);
+  //   }
+  // };
 
   const updateCartItem = async (itemId, quantity) => {
     try {

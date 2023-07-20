@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './styles/Login.css';
 import {loginUrl} from '../../../api/Api';
 import axios from 'axios';
-import {useNavigate, Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Button} from '@mui/material';
 
 function Login () {
