@@ -2,7 +2,6 @@ import {useState, useCallback, useEffect, useContext} from 'react';
 import {
   Grid,
   Box,
-  useMediaQuery,
   Button,
   Skeleton,
   Avatar,
@@ -12,7 +11,6 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {getAllCartItemsUrl, deleteCartItemUrl} from '../../api/Api';
 import CheckoutCard from '../reusables/CheckoutCard';
-import Loader from '../reusables/Loader';
 import { CartContext } from '../reusables/CartContext';
 
 const Checkout = () => {
@@ -20,7 +18,6 @@ const Checkout = () => {
   const { setCartItems } = useContext(CartContext);
   const [items, setItems] = useState ([]);
   const [totalPrice, setTotalPrice] = useState (0);
-  const [deleteRes, setDeleteRes] = useState ();
   const [isLoading, setIsLoading] = useState (true);
 
 
@@ -39,7 +36,7 @@ const Checkout = () => {
     } catch (error) {
       // alert ('Failed to fetch cart items:', error);
     }
-  }, []);
+  }, [setCartItems]);
 
   const handleDelete = async productId => {
     try {

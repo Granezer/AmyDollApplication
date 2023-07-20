@@ -72,7 +72,7 @@ const Hero = () => {
       setIndex((index + 1) % Contents.length)
     }, 10000)
     return () => clearInterval(intervalId)
-  }, [index])
+  }, [index, Contents.length])
 
   return (
     <Grid

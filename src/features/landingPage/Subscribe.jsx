@@ -1,6 +1,5 @@
 import style from './styles/Subscribe.module.css';
 import { useTheme, useMediaQuery, Grid, Button, Typography, TextField } from '@mui/material';
-import { Input } from '@chakra-ui/react'
 import { useState } from 'react';
 import axios from 'axios';
 import { createSubscribeUrl } from '../../api/Api';

@@ -7,6 +7,7 @@ export const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const sessionId = localStorage.getItem('sessionId');
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const updateCartItems = async () => {
@@ -14,6 +15,7 @@ const CartProvider = ({ children }) => {
       const response = await axios.get(getAllCartItemsUrl(sessionId, cartId));
       if (response.status === 200) {
         setCartItems(response.data.response.data);
+        setLoading(false)
       } else {
         // Handle error here
       }
@@ -23,7 +25,7 @@ const CartProvider = ({ children }) => {
   }, [sessionId]);
 
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems }}>
+    <CartContext.Provider value={{ cartItems, loading, setCartItems }}>
       {children}
     </CartContext.Provider>
   );

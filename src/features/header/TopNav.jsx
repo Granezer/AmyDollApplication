@@ -1,11 +1,9 @@
 import CartIcon from '../../assets/image/Cart.svg'
 import SearchIcon from '../../assets/image/Search.svg'
 import style from './styles/TopNav.module.css'
-import { useState, useEffect, useCallback, useContext } from 'react'
+import { useContext } from 'react'
 import { useTheme, useMediaQuery, Grid, Typography } from '@mui/material'
 import Logo from '../../assets/image/Logo.jpeg'
-import { getAllCartItemsUrl, getAllProducts } from '../../api/Api'
-import axios from 'axios'
 import { useNavigate, useLocation } from 'react-router-dom';
 import{ Button, Skeleton } from '@mui/material'
 import { CartContext } from '../reusables/CartContext';
@@ -17,31 +15,12 @@ const TopNav = () => {
   const hideButton = location.pathname === '/admin/dashbord'
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const [items, setItems] = useState([])
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, loading } = useContext(CartContext);
   const { searchText, setSearchText } = useContext(SearchContext);
-  const [isLoading, setIsLoading] = useState(true);
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
-
-  useEffect(() => {
-    const updateCartItems = async () => {
-      const sessionId = localStorage.getItem('sessionId');
-      const cartId = localStorage.getItem('cartId');
-      const response = await axios.get(getAllCartItemsUrl(sessionId, cartId));
-      if (response.status === 200) {
-        setItems(response.data.response.data);
-        setIsLoading(false)
-
-      } else {
-        // alert(response.message);
-      }
-    };
-
-    updateCartItems();
-  }, []);
 
   const getCartItemCount = () => {
     let totalQuantity = 0;
@@ -184,7 +163,7 @@ const TopNav = () => {
                   >
                     <img src={CartIcon} alt='CartIcon' />
                   </Button>
-                  {isLoading ? (
+                  {loading ? (
                     <Skeleton variant="circular" width={40} height={40} />
                   ):(
                   cartItems.length >= 0 && (
@@ -269,7 +248,7 @@ const TopNav = () => {
                   Book Session
                 </Typography>
               </Grid>
-                {/* {isLoading ? ( */}
+                {/* {loading ? ( */}
                   {/* <Grid
                   item
                   sm={1}
@@ -324,7 +303,7 @@ const TopNav = () => {
                   >
                     <img src={CartIcon} alt='CartIcon' />
                   </Button>
-                  {isLoading ? (
+                  {loading ? (
                     <Skeleton variant="circular" width={40} height={40} />
                   ):(
                   cartItems.length >= 0 && (

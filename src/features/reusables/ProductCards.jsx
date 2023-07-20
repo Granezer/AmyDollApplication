@@ -10,9 +10,7 @@ import {
 import PropTypes from 'prop-types';
 import {addToCartUrl, getAllCartItemsUrl} from '../../api/Api';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
-import {cartItems} from '../header/TopNav';
-import { useState, useContext  } from 'react';
+import { useContext  } from 'react';
 import {useLocation} from 'react-router-dom';
 import { CartContext } from './CartContext';
 
@@ -21,11 +19,8 @@ const ProductCards = props => {
   const sessionId = localStorage.getItem('sessionId');
   const location = useLocation ();
   const hideButton = location.pathname === '/admin/dashbord';
-
-  const navigate = useNavigate ();
   const theme = useTheme ();
   const isMobile = useMediaQuery (theme.breakpoints.down ('md'));
-  const [items, setItems] = useState ([]);
 
   const sendItemToCart = async () => {
     if (!props.productId) {
@@ -46,7 +41,6 @@ const ProductCards = props => {
       const cartItemsResponse = await axios.get(getAllCartItemsUrl(sessionId, cartId));
 
       if (cartItemsResponse.status === 200) {
-        setItems(cartItemsResponse.data.response.data);
         setCartItems(cartItemsResponse.data.response.data); 
       } else {
         // alert (cartItemsResponse.message);
@@ -56,34 +50,21 @@ const ProductCards = props => {
     }
   };
 
-  // const handleAddToCart = () => {
-  //   sendItemToCart ();
-  //   cartItems (items);
-  // };
-
   const handleAddToCart = async () => {
     await sendItemToCart();
-    // const sessionId = localStorage.getItem('sessionId');
-    // const cartId = localStorage.getItem('cartId');
-    // const cartItemsResponse = await axios.get(getAllCartItemsUrl(sessionId, cartId));
-    // if (cartItemsResponse.status === 200) {
-    //   setCartItems(cartItemsResponse.data.response.data);
-    // } else {
-    //   alert(cartItemsResponse.message);
-    // }
   };
 
-  const handleBuyNow = () => {
-    navigate ('/single-product', {
-      state: {
-        image_: props.image,
-        name: props.name,
-        price: props.price,
-        salesPrice: props.salesPrice,
-        description: props.description,
-      },
-    });
-  };
+  // const handleBuyNow = () => {
+  //   navigate ('/single-product', {
+  //     state: {
+  //       image_: props.image,
+  //       name: props.name,
+  //       price: props.price,
+  //       salesPrice: props.salesPrice,
+  //       description: props.description,
+  //     },
+  //   });
+  // };
 
   return (
     <Grid
