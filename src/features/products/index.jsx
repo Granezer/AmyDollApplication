@@ -98,7 +98,7 @@ const Product = () => {
         <Grid item lg={12} sm={12} xs={12} xl={12} md={12}>
           <Grid container spacing={{ xl: 3, lg: 3, md: 6, sm: 5, xs: 2 }}>
             {data.map((value, index) => (
-              <Grid item lg={3} sm={6} xs={12} xl={3} md={3.5} key={value.id}>
+              <Grid item lg={3} sm={6} xs={12} xl={3} md={3.8} key={value.id}>
                 <ProductCards
                   productId={value.id}
                   image={value.image}
