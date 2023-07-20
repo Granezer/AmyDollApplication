@@ -12,10 +12,12 @@ import {addToCartUrl, getAllCartItemsUrl} from '../../api/Api';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import {cartItems} from '../header/TopNav';
-import {useState} from 'react';
+import { useState, useContext  } from 'react';
 import {useLocation} from 'react-router-dom';
+import { CartContext } from './CartContext';
 
 const ProductCards = props => {
+  const { setCartItems } = useContext(CartContext);
   const sessionId = localStorage.getItem('sessionId');
   const location = useLocation ();
   const hideButton = location.pathname === '/admin/dashbord';
@@ -45,17 +47,30 @@ const ProductCards = props => {
 
       if (cartItemsResponse.status === 200) {
         setItems(cartItemsResponse.data.response.data);
+        setCartItems(cartItemsResponse.data.response.data); 
       } else {
-        alert (cartItemsResponse.message);
+        // alert (cartItemsResponse.message);
       }
     } catch (error) {
-      alert ('Failed to add item to cart:', error);
+      // alert ('Failed to add item to cart:', error);
     }
   };
 
-  const handleAddToCart = () => {
-    sendItemToCart ();
-    cartItems (items);
+  // const handleAddToCart = () => {
+  //   sendItemToCart ();
+  //   cartItems (items);
+  // };
+
+  const handleAddToCart = async () => {
+    await sendItemToCart();
+    // const sessionId = localStorage.getItem('sessionId');
+    // const cartId = localStorage.getItem('cartId');
+    // const cartItemsResponse = await axios.get(getAllCartItemsUrl(sessionId, cartId));
+    // if (cartItemsResponse.status === 200) {
+    //   setCartItems(cartItemsResponse.data.response.data);
+    // } else {
+    //   alert(cartItemsResponse.message);
+    // }
   };
 
   const handleBuyNow = () => {

@@ -97,9 +97,9 @@ const Hero = () => {
           height: !isMobile ? '50px' : '50px',
         }}
       >
-        <Grid Container display="flex" p="10px 10px" textAlign="center">
+        <Grid container display="flex" p="10px 10px" textAlign="center">
           {!isMobile && (
-            <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
+            <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={2}>
               <li style={{ listStyle: 'none' }}>
                 <Link
                   to="/services-offered"
@@ -115,7 +115,7 @@ const Hero = () => {
               </li>
             </Grid>
           )}
-          <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
+          <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={2}>
             <li style={{ listStyle: 'none' }}>
               <Link
                 to="/product"
@@ -130,7 +130,7 @@ const Hero = () => {
               </Link>
             </li>
           </Grid>
-          <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
+          <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={2}>
             <li style={{ listStyle: 'none' }}>
               <Link
                 to="/spa"
@@ -145,7 +145,7 @@ const Hero = () => {
               </Link>
             </li>
           </Grid>
-          <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={3}>
+          <Grid item lg={2.4} xl={2.4} sm={3} xs={3} md={2}>
             <li style={{ listStyle: 'none' }}>
               <Link
                 to="/saloon"
@@ -161,7 +161,7 @@ const Hero = () => {
             </li>
           </Grid>
           {!isMobile && (
-            <Grid item lg={2.4} xl={2.4} sm={5} xs={5} md={5}>
+            <Grid item lg={2.4} xl={2.4} sm={5} xs={5} md={4}>
               <li style={{ listStyle: 'none' }}>
                 <Link
                   to="/pedicure-medicure"

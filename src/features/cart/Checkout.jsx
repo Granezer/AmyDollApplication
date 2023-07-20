@@ -1,4 +1,4 @@
-import {useState, useCallback, useEffect} from 'react';
+import {useState, useCallback, useEffect, useContext} from 'react';
 import {
   Grid,
   Box,
@@ -13,13 +13,16 @@ import axios from 'axios';
 import {getAllCartItemsUrl, deleteCartItemUrl} from '../../api/Api';
 import CheckoutCard from '../reusables/CheckoutCard';
 import Loader from '../reusables/Loader';
+import { CartContext } from '../reusables/CartContext';
 
 const Checkout = () => {
   const navigate = useNavigate ();
+  const { setCartItems } = useContext(CartContext);
   const [items, setItems] = useState ([]);
   const [totalPrice, setTotalPrice] = useState (0);
   const [deleteRes, setDeleteRes] = useState ();
   const [isLoading, setIsLoading] = useState (true);
+
 
   const fetchCartItems = useCallback (async () => {
     try {
@@ -28,9 +31,10 @@ const Checkout = () => {
       const response = await axios.get (getAllCartItemsUrl (sessionId, cartId));
       if (response.status === 200) {
         setItems (response.data.response.data);
+        setCartItems(response.data.response.data);
         setIsLoading (false);
       } else {
-        alert (response.message);
+        // alert (response.message);
       }
     } catch (error) {
       // alert ('Failed to fetch cart items:', error);

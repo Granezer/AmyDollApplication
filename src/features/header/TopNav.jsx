@@ -1,17 +1,14 @@
 import CartIcon from '../../assets/image/Cart.svg'
 import SearchIcon from '../../assets/image/Search.svg'
 import style from './styles/TopNav.module.css'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useContext } from 'react'
 import { useTheme, useMediaQuery, Grid, Typography } from '@mui/material'
 import Logo from '../../assets/image/Logo.jpeg'
 import { getAllCartItemsUrl, getAllProducts } from '../../api/Api'
 import axios from 'axios'
 import { useNavigate, useLocation } from 'react-router-dom';
-import{ Button } from '@mui/material'
-
-export const cartItems = (value) => {
-  return value.length
-}
+import{ Button, Skeleton } from '@mui/material'
+import { CartContext } from '../reusables/CartContext';
 
 const TopNav = () => {
   const navigate = useNavigate()
@@ -21,10 +18,10 @@ const TopNav = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [searchProduct, setSearchProduct] = useState()
   const [items, setItems] = useState([])
-  const [quantity, setQuantity] = useState(cartItems(items))
+  const { cartItems } = useContext(CartContext);
   // const [product, setProduct] = useState([])
   // const [filteredProducts, setFilteredProducts] = useState([])
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleChange = (e) => {
     setSearchProduct(e.target.value)
@@ -61,8 +58,7 @@ const TopNav = () => {
       const response = await axios.get(getAllCartItemsUrl(sessionId, cartId));
       if (response.status === 200) {
         setItems(response.data.response.data);
-        setQuantity(cartItems(response.data.response.data));
-        // setIsLoading(false)
+        setIsLoading(false)
 
       } else {
         // alert(response.message);
@@ -71,6 +67,17 @@ const TopNav = () => {
 
     updateCartItems();
   }, []);
+
+  const getCartItemCount = () => {
+    console.log('caerrrr --> ', cartItems)
+    let totalQuantity = 0;
+    cartItems.forEach((item) => {
+      totalQuantity += item.quantity;
+    });
+    console.log('caerrrr total --> ', totalQuantity)
+    return totalQuantity;
+  };
+  
 
   return (
     <>
@@ -200,18 +207,23 @@ const TopNav = () => {
                   >
                     <img src={CartIcon} alt='CartIcon' />
                   </Button>
-                  <span
-                    style={{
-                      color: 'black',
-                      fontSize: '20px',
-                      fontWeight: '700',
-                      backgroundColor: 'transparent',
-                      marginTop: '-15px',
-                      borderRadius: '50%',
-                    }}
-                  >
-                    {quantity}
-                  </span>
+                  {isLoading ? (
+                    <Skeleton variant="circular" width={40} height={40} />
+                  ):(
+                  cartItems.length > 0 && (
+                    <span
+                      style={{
+                        color: 'black',
+                        fontSize: '20px',
+                        fontWeight: '700',
+                        backgroundColor: 'transparent',
+                        marginTop: '-15px',
+                        borderRadius: '50%',
+                      }}
+                    >
+                      {getCartItemCount()}
+                    </span>
+                  ))}
                 </Grid>
               )}
             </Grid>
@@ -335,18 +347,23 @@ const TopNav = () => {
                   >
                     <img src={CartIcon} alt='CartIcon' />
                   </Button>
-                  <span
-                    style={{
-                      color: '#000',
-                      fontSize: '16px',
-                      fontWeight: '700',
-                      backgroundColor: 'transparent',
-                      marginTop: '-15px',
-                      borderRadius: '50%',
-                    }}
-                  >
-                    {quantity}
-                  </span>
+                  {isLoading ? (
+                    <Skeleton variant="circular" width={40} height={40} />
+                  ):(
+                  cartItems.length > 0 && (
+                    <span
+                      style={{
+                        color: 'black',
+                        fontSize: '20px',
+                        fontWeight: '700',
+                        backgroundColor: 'transparent',
+                        marginTop: '-15px',
+                        borderRadius: '50%',
+                      }}
+                    >
+                      {cartItems.length}
+                    </span>
+                  ))}
                 </Grid>
                 {/* )} */}
             </Grid>
