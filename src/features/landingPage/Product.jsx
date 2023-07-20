@@ -108,7 +108,7 @@ const Product = () => {
             }, height: {
               lg: '100px',
               md: '100px',
-              sm: '1050px',
+              sm: '100px',
               xs: '100px',
               xl: '100px',
             }, fontWeight: 700, color: '#e79595' }}>
