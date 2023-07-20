@@ -166,7 +166,7 @@ const TopNav = () => {
                   {loading ? (
                     <Skeleton variant="circular" width={40} height={40} />
                   ):(
-                  cartItems.length > 0 && (
+                  getCartItemCount() > 0 && (
                     <span
                       style={{
                         color: 'black',
@@ -306,7 +306,7 @@ const TopNav = () => {
                   {loading ? (
                     <Skeleton variant="circular" width={40} height={40} />
                   ):(
-                  cartItems.length > 0 && (
+                  getCartItemCount() > 0 && (
                     <span
                       style={{
                         color: 'black',
