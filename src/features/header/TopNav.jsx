@@ -9,6 +9,7 @@ import axios from 'axios'
 import { useNavigate, useLocation } from 'react-router-dom';
 import{ Button, Skeleton } from '@mui/material'
 import { CartContext } from '../reusables/CartContext';
+import { SearchContext } from '../reusables/ProductContext'
 
 const TopNav = () => {
   const navigate = useNavigate()
@@ -16,40 +17,14 @@ const TopNav = () => {
   const hideButton = location.pathname === '/admin/dashbord'
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const [searchProduct, setSearchProduct] = useState()
   const [items, setItems] = useState([])
   const { cartItems } = useContext(CartContext);
-  // const [product, setProduct] = useState([])
-  // const [filteredProducts, setFilteredProducts] = useState([])
+  const { searchText, setSearchText } = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleChange = (e) => {
-    setSearchProduct(e.target.value)
-  }
-
-  // const fetchProducts = useCallback(async () => {
-  //   try {
-  //     const response = await axios.get(getAllProducts)
-  //     if (response.status === 200) {
-  //       const data = response.data.response.data
-  //       if(data.lenght !== 0){
-  //         setProduct(data)
-  //         console.log('prd --> ', data)
-  //         setIsLoading(false)
-  //       }else{
-  //         setIsLoading(true)
-  //       }
-  //     } else {
-  //       alert('Unable to fetch data')
-  //     }
-  //   } catch (error) {
-  //     alert(error)
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   fetchProducts()
-  // }, [fetchProducts])
+    setSearchText(e.target.value);
+  };
 
   useEffect(() => {
     const updateCartItems = async () => {
@@ -69,12 +44,12 @@ const TopNav = () => {
   }, []);
 
   const getCartItemCount = () => {
-    console.log('caerrrr --> ', cartItems)
     let totalQuantity = 0;
-    cartItems.forEach((item) => {
-      totalQuantity += item.quantity;
-    });
-    console.log('caerrrr total --> ', totalQuantity)
+    if (cartItems) {
+      cartItems.forEach((item) => {
+        totalQuantity += item.quantity;
+      });
+    }
     return totalQuantity;
   };
   
@@ -141,7 +116,7 @@ const TopNav = () => {
                   }}
                   type='text'
                   placeholder='Search for products...'
-                  value={searchProduct}
+                  value={searchText}
                   onChange={handleChange}
                 />
               </Grid>
@@ -174,6 +149,7 @@ const TopNav = () => {
                 item
                 lg={11}
                 xl={11}
+                md={9}
                 sx={{
                   textAlignLast: 'center',
                   display: 'flex',
@@ -192,6 +168,7 @@ const TopNav = () => {
                   item
                   lg={1}
                   xl={1}
+                  md={3}
                   sx={{
                     textAlignLast: 'center',
                     display: 'flex',
@@ -210,7 +187,7 @@ const TopNav = () => {
                   {isLoading ? (
                     <Skeleton variant="circular" width={40} height={40} />
                   ):(
-                  cartItems.length > 0 && (
+                  cartItems.length >= 0 && (
                     <span
                       style={{
                         color: 'black',
@@ -350,7 +327,7 @@ const TopNav = () => {
                   {isLoading ? (
                     <Skeleton variant="circular" width={40} height={40} />
                   ):(
-                  cartItems.length > 0 && (
+                  cartItems.length >= 0 && (
                     <span
                       style={{
                         color: 'black',
@@ -361,7 +338,7 @@ const TopNav = () => {
                         borderRadius: '50%',
                       }}
                     >
-                      {cartItems.length}
+                      {getCartItemCount()}
                     </span>
                   ))}
                 </Grid>
@@ -400,7 +377,7 @@ const TopNav = () => {
                   }}
                   type='text'
                   placeholder='Search for products...'
-                  value={searchProduct}
+                  value={searchText}
                   onChange={handleChange}
                 />
               </Grid>

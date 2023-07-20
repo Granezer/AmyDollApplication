@@ -12,7 +12,7 @@ const CheckoutCard = (props) => {
       <Grid item lg={4} xl={4} md={4} sm={3} xs={3} display={{lg: 'flex', xl: 'flex', md: 'flex', sm: '', xs: ''}} justifyContent={{lg: 'center', xl: 'center', md: 'center', sm: '', xs: ''}} alignItems={{lg: 'center', xl: 'center', md: 'center', sm: '', xs: ''}}>
         <img src={props.item.image} alt="imag" width='100px' height={{xs: '10px', lg: "200px", xl: "100px", md: "150px", sm: "150px"}} />
       </Grid>
-      <Grid item lg={5} xl={5} md={6} sm={6} xs={5} ml={{xs: '30px'}}>
+      <Grid item lg={5} xl={5} md={5} sm={6} xs={5} ml={{xs: '30px'}}>
         <li
           key={props.item.productId}
           style={{display: 'block', alignItems: 'center'}}

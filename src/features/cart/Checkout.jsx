@@ -50,6 +50,7 @@ const Checkout = () => {
       setItems (prevItems =>
         prevItems.filter (item => item.productId !== productId)
       );
+      setCartItems(prevItems => prevItems.filter(item => item.productId !== productId));
     } catch (error) {
       // alert ('Error removing cart item:', error);
     }
@@ -123,7 +124,7 @@ const Checkout = () => {
       container
       sx={{backgroundColor: '#fff', color: '#000', p: '30px 20px'}}
     >
-      <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+      <Grid item lg={12} xl={12} md={12} sm={12} xs={12} mb={3}>
         <h1 style={{color: '#e79595', textAlign: 'center'}}>Checkout</h1>
       </Grid>
       {items === null || items.length === 0

@@ -14,11 +14,17 @@ import NotFound from './features/reusables/NotFound';
 import Checkout from './features/cart/Checkout';
 import Billing from './features/cart/Billing';
 import Loader from './features/reusables/Loader';
+import { ProductProvider, SearchProvider } from './features/reusables/ProductContext';
 
 function App() {
   return (
     <Router>
-      <AppContent />
+      
+      <ProductProvider>
+        <SearchProvider>
+          <AppContent />
+        </SearchProvider>
+      </ProductProvider>
     </Router>
   );
 }

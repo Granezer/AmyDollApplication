@@ -7,40 +7,27 @@ import {
   Button,
   Typography,
   Box, Skeleton
-} from '@mui/material'
-import ThreeGirl from '../../assets/image/ThreeGirl.png'
-import { getAllProducts } from '../../api/Api'
-import { useState, useCallback, useEffect } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import Loader from '../reusables/Loader'
+} from '@mui/material';
+import ThreeGirl from '../../assets/image/ThreeGirl.png';
+import { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ProductContext, SearchContext } from '../reusables/ProductContext';
 
 const Product = () => {
   const navigate = useNavigate()
+  const { products, loading } = useContext(ProductContext);
+  const { searchText } = useContext(SearchContext);
+  const [searchResultEmpty, setSearchResultEmpty] = useState(false);
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const [loading, setLoading] = useState(true)
 
-  const [data, setData] = useState([])
-
-  const fetchProducts = useCallback(async () => {
-    try {
-      const response = await axios.get(getAllProducts)
-      if (response.status === 200) {
-        const limitedData = response.data.response.data.slice(0, 4)
-        setData(limitedData)
-        setLoading(false)
-      } else {
-        // alert('Unable to fetch data')
-      }
-    } catch (error) {
-      // alert(error);
-    }
-  }, [])
+  const filteredProducts = products.slice(0, 4).filter((product) =>
+    product.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   useEffect(() => {
-    fetchProducts()
-  }, [fetchProducts])
+    setSearchResultEmpty(filteredProducts.length === 0);
+  }, [filteredProducts]); 
 
   const centerTwoStyle = {
     display: 'flex',
@@ -80,7 +67,7 @@ const Product = () => {
         sx={centerTwoStyle}
       >
         {Array.from({ length: 4 }).map((_, index) => (
-          <Grid item lg={2.5} sm={6} xs={12} xl={2.5} md={6} key={index}>
+          <Grid item lg={2.5} sm={6} xs={12} xl={2.5} md={2.5} key={index}>
             <Box>
               <Skeleton
                 variant='rectangular'
@@ -111,8 +98,25 @@ const Product = () => {
             rowSpacing={!isMobile ? 5 : isMobile ? 3 : 0}
             columnSpacing={!isMobile ? 5 : isMobile ? 12 : 0}
           >
-            {data.map((value, index) => (
-              <Grid item lg={3} sm={6} xs={12} xl={3} md={6} key={index}>
+            {searchResultEmpty ? (
+            <Typography sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%',  fontSize: {
+              lg: '30px',
+              md: '25px',
+              sm: '20px',
+              xs: '20px',
+              xl: '30px',
+            }, height: {
+              lg: '100px',
+              md: '100px',
+              sm: '1050px',
+              xs: '100px',
+              xl: '100px',
+            }, fontWeight: 700, color: '#e79595' }}>
+              Product with searched name not found.
+            </Typography>
+          ) : (
+            filteredProducts.map((value, index) => (
+              <Grid item lg={3} sm={6} xs={12} xl={3} md={4} key={index}>
                 <ProductCards
                   productId={value.id}
                   image={value.image}
@@ -122,7 +126,8 @@ const Product = () => {
                   description={value.description}
                 />
               </Grid>
-            ))}
+            ))
+          )}
           </Grid>
         </Grid>
       )}

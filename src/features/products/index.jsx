@@ -1,33 +1,22 @@
 import ProductCards from '../reusables/ProductCards'
 import { useTheme, useMediaQuery, Grid, Typography, Box, Skeleton } from '@mui/material'
-import { getAllProducts } from '../../api/Api'
-import { useState, useCallback, useEffect } from 'react'
-import axios from 'axios'
-import Loader from '../reusables/Loader'
+import { useContext, useState, useEffect } from 'react'
+import { ProductContext, SearchContext } from '../reusables/ProductContext'
 
 const Product = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const [loading, setLoading] = useState(true)
-  const [data, setData] = useState([])
+  const { products, loading } = useContext(ProductContext);
+  const [searchResultEmpty, setSearchResultEmpty] = useState(false);
+  const { searchText } = useContext(SearchContext);
 
-  const fetchProducts = useCallback(async () => {
-    try {
-      const response = await axios.get(getAllProducts)
-      if (response.status === 200) {
-        setData(response.data.response.data)
-        setLoading(false)
-      } else {
-        // alert('Unable to fetch data')
-      }
-    } catch (error) {
-      // alert(error)
-    }
-  }, [])
+    const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   useEffect(() => {
-    fetchProducts()
-  }, [fetchProducts])
+    setSearchResultEmpty(filteredProducts.length === 0);
+  }, [filteredProducts]); 
 
   const centerTwoStyle = {
     display: 'flex',
@@ -66,7 +55,7 @@ const Product = () => {
         See All Product
       </Typography>
       {loading ? (
-          <Grid container
+        <Grid container
           sx={centerTwoStyle}
         >
           {Array.from({ length: 4 }).map((_, index) => (
@@ -97,8 +86,25 @@ const Product = () => {
       ) : (
         <Grid item lg={12} sm={12} xs={12} xl={12} md={12}>
           <Grid container spacing={{ xl: 3, lg: 3, md: 6, sm: 5, xs: 2 }}>
-            {data.map((value, index) => (
-              <Grid item lg={3} sm={6} xs={12} xl={3} md={3.8} key={value.id}>
+            {searchResultEmpty ? (
+            <Typography sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%',  fontSize: {
+              lg: '30px',
+              md: '25px',
+              sm: '20px',
+              xs: '20px',
+              xl: '30px',
+            }, height: {
+              lg: '300px',
+              md: '300px',
+              sm: '300px',
+              xs: '300px',
+              xl: '300px',
+            }, fontWeight: 700, color: '#e79595' }}>
+              Product with searched name not found.
+            </Typography>
+          ) : (
+            filteredProducts.map((value, index) => (
+              <Grid item lg={3} sm={6} xs={12} xl={3} md={3.5} key={index}>
                 <ProductCards
                   productId={value.id}
                   image={value.image}
@@ -108,7 +114,7 @@ const Product = () => {
                   description={value.description}
                 />
               </Grid>
-            ))}
+            )))}
           </Grid>
         </Grid>
       )}
