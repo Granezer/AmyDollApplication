@@ -19,7 +19,6 @@ const Checkout = () => {
   const [items, setItems] = useState ([]);
   const [totalPrice, setTotalPrice] = useState (0);
   const [isLoading, setIsLoading] = useState (true);
-  const [isCheckout, setIsCheckout] = useState(true);
 
 
   const fetchCartItems = useCallback (async () => {
@@ -31,11 +30,6 @@ const Checkout = () => {
         setItems (response.data.response.data);
         setCartItems(response.data.response.data);
         setIsLoading (false);
-        if(items.length !== null){
-          setIsCheckout(true)
-        }else{
-          setIsCheckout(false)
-        }
       } else {
         // alert (response.message);
       }
@@ -70,7 +64,7 @@ const Checkout = () => {
     () => {
       const calculateTotalPrice = () => {
         let totalPrice = 0;
-        if (items && items.length) {
+        if (items && items !== null) {
           items.forEach (item => {
             totalPrice += item.salesPrice * item.quantity;
           });
@@ -130,7 +124,7 @@ const Checkout = () => {
       <Grid item lg={12} xl={12} md={12} sm={12} xs={12} mb={3}>
         <h1 style={{color: '#e79595', textAlign: 'center'}}>Checkout</h1>
       </Grid>
-      {items === null || items.length === 0
+      {totalPrice === 0
         ? <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <p style={{textAlign: 'center'}}>Your cart is empty.</p>
           </Grid>
@@ -149,7 +143,8 @@ const Checkout = () => {
                 </li>
               ))}
             </ul>
-          </Grid>}
+        </Grid>
+      }
       <Grid
         item
         lg={12}
@@ -239,7 +234,7 @@ const Checkout = () => {
           },
         }}
         onClick={() => {
-          if (isCheckout === true) {
+          if (totalPrice !== 0) {
             navigate('/billing', {
               state: {
                 amount: totalPrice,
@@ -254,7 +249,7 @@ const Checkout = () => {
           }
         }}
       >
-        {isCheckout === true ? 'Checkout' : 'Buy Now'}
+        {totalPrice === 0 ? 'Buy Now' : 'Checkout'}
       </Button>
     </Grid>
   );
