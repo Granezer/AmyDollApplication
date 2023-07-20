@@ -69,12 +69,12 @@ const TopNav = () => {
   }, []);
 
   const getCartItemCount = () => {
-    console.log('caerrrr --> ', cartItems)
     let totalQuantity = 0;
-    cartItems.forEach((item) => {
-      totalQuantity += item.quantity;
-    });
-    console.log('caerrrr total --> ', totalQuantity)
+    if (cartItems) {
+      cartItems.forEach((item) => {
+        totalQuantity += item.quantity;
+      });
+    }
     return totalQuantity;
   };
   
@@ -313,23 +313,18 @@ const TopNav = () => {
                   >
                     <img src={CartIcon} alt='CartIcon' />
                   </Button>
-                 {isLoading ? (
-                    <Skeleton variant="circular" width={40} height={40} />
-                  ):(
-                  cartItems.length >= 0 && (
-                    <span
-                      style={{
+                  <span
+                    style={{
                       color: '#000',
                       fontSize: '16px',
                       fontWeight: '700',
                       backgroundColor: 'transparent',
                       marginTop: '-15px',
                       borderRadius: '50%',
-                      }}
-                    >
-                      {getCartItemCount()}
-                    </span>
-                  ))}
+                    }}
+                  >
+                    {quantity === 0}
+                  </span>
                 </Grid>
                 ):( */}
                   <Grid
@@ -355,7 +350,7 @@ const TopNav = () => {
                   {isLoading ? (
                     <Skeleton variant="circular" width={40} height={40} />
                   ):(
-                  cartItems.length > 0 && (
+                  cartItems.length >= 0 && (
                     <span
                       style={{
                         color: 'black',
@@ -366,7 +361,7 @@ const TopNav = () => {
                         borderRadius: '50%',
                       }}
                     >
-                      {cartItems.length}
+                      {getCartItemCount()}
                     </span>
                   ))}
                 </Grid>
